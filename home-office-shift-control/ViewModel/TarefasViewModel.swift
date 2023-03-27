@@ -8,11 +8,11 @@
 import Foundation
 
 
-final class UsersViewModel: ObservableObject {
+final class TarefasViewModel: ObservableObject {
     
-    @Published var users: [Tarefa] = []
+    @Published var tarefas: [Tarefa] = []
     
-    func fetchUsers() {
+    func fetchTarefas() {
         
         let usersUrlString = "http://localhost:3000/tarefas"
         if let url = URL(string: usersUrlString){
@@ -35,7 +35,7 @@ final class UsersViewModel: ObservableObject {
                            let users = try? decoder.decode([Tarefa].self, from: data){
                             //TODO: Handle setting the data
                             
-                            self.users = users
+                            self.tarefas = users
                             
                         } else {
                             

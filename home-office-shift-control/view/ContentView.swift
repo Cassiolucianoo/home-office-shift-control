@@ -9,20 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject private var vm = UsersViewModel()
+    @StateObject private var vm = TarefasViewModel()
     
     var body: some View {
         NavigationView{
             ZStack {
                 List{
                     
-                    ForEach(vm.users, id: \.id ){ user in
+                    ForEach(vm.tarefas, id: \.id ){ user in
                         TarefaView(tarefa: user)
                     }
                 }
                 .navigationTitle("Tarefas")
             }
-            .onAppear(perform: vm.fetchUsers)
+            .onAppear(perform: vm.fetchTarefas)
             
         }
     }
