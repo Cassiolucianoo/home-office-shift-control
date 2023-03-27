@@ -7,17 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF5DBBB029D16C6300B37585 /* TarefaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAA29D16C6300B37585 /* TarefaView.swift */; };
+		DF5DBBB129D16C6300B37585 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAB29D16C6300B37585 /* ContentView.swift */; };
+		DF5DBBB229D16C6300B37585 /* Tarefa.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAD29D16C6300B37585 /* Tarefa.swift */; };
+		DF5DBBB329D16C6300B37585 /* UsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAF29D16C6300B37585 /* UsersViewModel.swift */; };
 		DF6F323729CEB64500E06F7B /* home_office_shift_controlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F323629CEB64500E06F7B /* home_office_shift_controlApp.swift */; };
-		DF6F323929CEB64500E06F7B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F323829CEB64500E06F7B /* ContentView.swift */; };
 		DF6F323B29CEB64700E06F7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF6F323A29CEB64700E06F7B /* Assets.xcassets */; };
 		DF6F323E29CEB64700E06F7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF6F323D29CEB64700E06F7B /* Preview Assets.xcassets */; };
 		DFC98B4829D095BE00F85B10 /* db.json in Resources */ = {isa = PBXBuildFile; fileRef = DFC98B4729D095BE00F85B10 /* db.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF5DBBAA29D16C6300B37585 /* TarefaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TarefaView.swift; sourceTree = "<group>"; };
+		DF5DBBAB29D16C6300B37585 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DF5DBBAD29D16C6300B37585 /* Tarefa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tarefa.swift; sourceTree = "<group>"; };
+		DF5DBBAF29D16C6300B37585 /* UsersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewModel.swift; sourceTree = "<group>"; };
 		DF6F323329CEB64500E06F7B /* home-office-shift-control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "home-office-shift-control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6F323629CEB64500E06F7B /* home_office_shift_controlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home_office_shift_controlApp.swift; sourceTree = "<group>"; };
-		DF6F323829CEB64500E06F7B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DF6F323A29CEB64700E06F7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF6F323D29CEB64700E06F7B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DF6F323F29CEB64700E06F7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -35,6 +41,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF5DBBA929D16C6300B37585 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				DF5DBBAA29D16C6300B37585 /* TarefaView.swift */,
+				DF5DBBAB29D16C6300B37585 /* ContentView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		DF5DBBAC29D16C6300B37585 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				DF5DBBAD29D16C6300B37585 /* Tarefa.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		DF5DBBAE29D16C6300B37585 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DF5DBBAF29D16C6300B37585 /* UsersViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		DF6F322A29CEB64500E06F7B = {
 			isa = PBXGroup;
 			children = (
@@ -54,9 +85,11 @@
 		DF6F323529CEB64500E06F7B /* home-office-shift-control */ = {
 			isa = PBXGroup;
 			children = (
-				DFC98B4729D095BE00F85B10 /* db.json */,
+				DF5DBBA929D16C6300B37585 /* view */,
+				DF5DBBAC29D16C6300B37585 /* model */,
+				DF5DBBAE29D16C6300B37585 /* ViewModel */,
 				DF6F323629CEB64500E06F7B /* home_office_shift_controlApp.swift */,
-				DF6F323829CEB64500E06F7B /* ContentView.swift */,
+				DFC98B4729D095BE00F85B10 /* db.json */,
 				DF6F323A29CEB64700E06F7B /* Assets.xcassets */,
 				DF6F323F29CEB64700E06F7B /* Info.plist */,
 				DF6F323C29CEB64700E06F7B /* Preview Content */,
@@ -142,7 +175,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF6F323929CEB64500E06F7B /* ContentView.swift in Sources */,
+				DF5DBBB229D16C6300B37585 /* Tarefa.swift in Sources */,
+				DF5DBBB329D16C6300B37585 /* UsersViewModel.swift in Sources */,
+				DF5DBBB029D16C6300B37585 /* TarefaView.swift in Sources */,
+				DF5DBBB129D16C6300B37585 /* ContentView.swift in Sources */,
 				DF6F323729CEB64500E06F7B /* home_office_shift_controlApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

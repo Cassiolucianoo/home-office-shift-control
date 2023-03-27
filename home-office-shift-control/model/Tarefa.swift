@@ -9,7 +9,7 @@ import Foundation
 
 struct Tarefa: Codable{
     
-    let id: int
+    let id: Int
     let tarefa: String
     let tempoInicio: String
     let tempoFim: String
@@ -24,4 +24,4 @@ struct Tarefa: Codable{
 //    "id": 1
 //
     
-}
+
