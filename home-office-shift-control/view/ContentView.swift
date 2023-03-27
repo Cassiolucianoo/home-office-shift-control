@@ -11,18 +11,29 @@ struct ContentView: View {
     
     @StateObject private var vm = TarefasViewModel()
     
+    
+    
     var body: some View {
+        
         NavigationView{
             ZStack {
+                
                 List{
                     
                     ForEach(vm.tarefas, id: \.id ){ user in
                         TarefaView(tarefa: user)
                     }
                 }
-                .navigationTitle("Tarefas")
             }
+            .navigationTitle("Tarefas")
             .onAppear(perform: vm.fetchTarefas)
+            
+            .alert(isPresented: $vm.hasError) {
+                
+                return Alert(title: Text("Erro ao carregar sua lista"),
+                             message: Text("Ocorreu um erro verifique seu acesso a rede, tente novamente mais tarde"),
+                             dismissButton: .default(Text("Ok")))
+            }
             
         }
     }
