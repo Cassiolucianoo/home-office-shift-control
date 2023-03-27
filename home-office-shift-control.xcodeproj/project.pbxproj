@@ -11,6 +11,7 @@
 		DF6F323929CEB64500E06F7B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F323829CEB64500E06F7B /* ContentView.swift */; };
 		DF6F323B29CEB64700E06F7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF6F323A29CEB64700E06F7B /* Assets.xcassets */; };
 		DF6F323E29CEB64700E06F7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF6F323D29CEB64700E06F7B /* Preview Assets.xcassets */; };
+		DFC98B4829D095BE00F85B10 /* db.json in Resources */ = {isa = PBXBuildFile; fileRef = DFC98B4729D095BE00F85B10 /* db.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		DF6F323A29CEB64700E06F7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF6F323D29CEB64700E06F7B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DF6F323F29CEB64700E06F7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFC98B4729D095BE00F85B10 /* db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = db.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		DF6F323529CEB64500E06F7B /* home-office-shift-control */ = {
 			isa = PBXGroup;
 			children = (
+				DFC98B4729D095BE00F85B10 /* db.json */,
 				DF6F323629CEB64500E06F7B /* home_office_shift_controlApp.swift */,
 				DF6F323829CEB64500E06F7B /* ContentView.swift */,
 				DF6F323A29CEB64700E06F7B /* Assets.xcassets */,
@@ -126,6 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFC98B4829D095BE00F85B10 /* db.json in Resources */,
 				DF6F323E29CEB64700E06F7B /* Preview Assets.xcassets in Resources */,
 				DF6F323B29CEB64700E06F7B /* Assets.xcassets in Resources */,
 			);
