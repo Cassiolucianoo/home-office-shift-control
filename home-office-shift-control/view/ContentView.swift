@@ -10,7 +10,15 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject private var vm = TarefasViewModel()
+    @State private var taskName: String = ""
+    @State private var tasks: [String] = []
+    @StateObject private var todoListVM = TarefasViewModel()
     
+    private func deleteTask(indexSet: IndexSet) {
+        indexSet.forEach { index in
+            tasks.remove(at: index)
+        }
+    }
     
     
     var body: some View {
@@ -18,12 +26,19 @@ struct ContentView: View {
         NavigationView{
             ZStack {
                 
-                List{
-                    
-                    ForEach(vm.tarefas, id: \.id ){ user in
-                        TarefaView(tarefa: user)
-                    }
-                }
+//                List{
+//                   ForEach(vm.tarefas, id: \.id ){ user in
+//                        TarefaView(tarefa: user)
+//                    }.onDelete { indexSet in
+//                        vm.tarefas.remove(atOffsets: indexSet)
+//
+//                    }
+//                }.onTapGesture {
+//                    ForEach(vm.tarefas, id: \.id ){ user in
+//                         TarefaView(tarefa: user)
+//                     }
+//               }
+
             }
             .navigationTitle("Tarefas")
             .onAppear(perform: vm.fetchTarefas)
