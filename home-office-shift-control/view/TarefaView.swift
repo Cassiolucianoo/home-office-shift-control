@@ -31,9 +31,9 @@ struct TarefaView: View {
     }
 }
 
-struct TarefaView_Previews: PreviewProvider {
-    static var previews: some View {
-        TarefaView(tarefa: .init (id: 0, tarefa: " Programa app", tempoInicio: " 12:00", tempoFim: " ", descricao: " "))
-    }
-}
+//struct TarefaView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TarefaView(tarefa: .init (id: 0, tarefa: " Programa app", tempoInicio: " 12:00", tempoFim: " ", descricao: " "))
+//    }
+//}
 

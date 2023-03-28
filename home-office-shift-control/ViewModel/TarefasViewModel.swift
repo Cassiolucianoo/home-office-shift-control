@@ -13,11 +13,12 @@ final class TarefasViewModel: ObservableObject {
     @Published var error: TarefasError?
     @Published private(set) var isRefreshing = false
     
-    @Published var tarefas: [Tarefa] = []
-    
+
+   @Published var tarefas: [Tarefa] = []
+
     func fetchTarefas() {
         
-        let usersUrlString = "http://localhost:3000/tarefass"
+        let usersUrlString = "http://localhost:3000/tarefas"
         if let url = URL(string: usersUrlString){
             
             URLSession

@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF598D9029D2BCC90028E5BE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF598D8F29D2BCC90028E5BE /* ViewModel.swift */; };
 		DF5DBBB029D16C6300B37585 /* TarefaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAA29D16C6300B37585 /* TarefaView.swift */; };
 		DF5DBBB129D16C6300B37585 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAB29D16C6300B37585 /* ContentView.swift */; };
-		DF5DBBB229D16C6300B37585 /* Tarefa.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAD29D16C6300B37585 /* Tarefa.swift */; };
+		DF5DBBB229D16C6300B37585 /* TarefaModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAD29D16C6300B37585 /* TarefaModels.swift */; };
 		DF5DBBB329D16C6300B37585 /* TarefasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAF29D16C6300B37585 /* TarefasViewModel.swift */; };
 		DF6F323729CEB64500E06F7B /* home_office_shift_controlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F323629CEB64500E06F7B /* home_office_shift_controlApp.swift */; };
 		DF6F323B29CEB64700E06F7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF6F323A29CEB64700E06F7B /* Assets.xcassets */; };
@@ -18,9 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF598D8F29D2BCC90028E5BE /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		DF5DBBAA29D16C6300B37585 /* TarefaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TarefaView.swift; sourceTree = "<group>"; };
 		DF5DBBAB29D16C6300B37585 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		DF5DBBAD29D16C6300B37585 /* Tarefa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tarefa.swift; sourceTree = "<group>"; };
+		DF5DBBAD29D16C6300B37585 /* TarefaModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TarefaModels.swift; sourceTree = "<group>"; };
 		DF5DBBAF29D16C6300B37585 /* TarefasViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TarefasViewModel.swift; sourceTree = "<group>"; };
 		DF6F323329CEB64500E06F7B /* home-office-shift-control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "home-office-shift-control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6F323629CEB64500E06F7B /* home_office_shift_controlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home_office_shift_controlApp.swift; sourceTree = "<group>"; };
@@ -53,7 +55,7 @@
 		DF5DBBAC29D16C6300B37585 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				DF5DBBAD29D16C6300B37585 /* Tarefa.swift */,
+				DF5DBBAD29D16C6300B37585 /* TarefaModels.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -62,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				DF5DBBAF29D16C6300B37585 /* TarefasViewModel.swift */,
+				DF598D8F29D2BCC90028E5BE /* ViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -175,11 +178,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF5DBBB229D16C6300B37585 /* Tarefa.swift in Sources */,
+				DF5DBBB229D16C6300B37585 /* TarefaModels.swift in Sources */,
 				DF5DBBB329D16C6300B37585 /* TarefasViewModel.swift in Sources */,
 				DF5DBBB029D16C6300B37585 /* TarefaView.swift in Sources */,
 				DF5DBBB129D16C6300B37585 /* ContentView.swift in Sources */,
 				DF6F323729CEB64500E06F7B /* home_office_shift_controlApp.swift in Sources */,
+				DF598D9029D2BCC90028E5BE /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
