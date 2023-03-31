@@ -13,6 +13,7 @@ struct NewPostView: View {
     @Binding var isPresented: Bool
     @EnvironmentObject var viewwModel: ViewModel
     @State var isAlert = false
+    @State private var wordCount: Int = 0
     
     var body: some View {
         NavigationView{
@@ -28,11 +29,26 @@ struct NewPostView: View {
                         .cornerRadius(6)
                         .padding(.bottom)
                     
-                    TextField("Informe a tarefa para postar", text: $post)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(6)
-                        .padding(.bottom)
+    
+                    ZStack(alignment: .topTrailing) {
+                                TextEditor(text: $post)
+                                    .cornerRadius(6)
+                                    .font(.body)
+                                    .padding(.top, 15)
+                                    //.keyboardType(.asciiCapable)
+                                    .onChange(of: post, perform: { value in
+                                        let words = value.count
+                                        self.wordCount = words
+                                        
+                                        
+                                    })
+                                    .padding(.top, 15)
+                                Text("\(wordCount) Palavras")
+                                    .font(.headline)
+                                    .foregroundColor(.secondary)
+                                    .padding(.trailing)
+                            }
+                    
                     
                     Spacer()
                 }.padding()
