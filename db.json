@@ -1,0 +1,11 @@
+{
+    "error": false,
+    "message": "Opa opa opa"
+  "data": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+    ]
+}

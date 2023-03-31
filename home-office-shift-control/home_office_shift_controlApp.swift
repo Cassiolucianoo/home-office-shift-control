@@ -11,7 +11,7 @@ import SwiftUI
 struct home_office_shift_controlApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(ViewModel())
         }
     }
 }
