@@ -13,14 +13,16 @@ import SwiftUI
 // http://localhost:3000/postTarefa
 
 class  ViewModel: ObservableObject {
-    @Published var items = [PostTarefa]()
+    
+    @Published var items = [PostModel]()
+    
     let prefixUrl = "http://localhost:3000"
     
     init() {
         fetchPost()
     }
     
-    //MARK: - recuperar DATA ----------------------
+    //MARK: - recuperar DATA ------------------------------------------------------------------
     func fetchPost() {
         guard let url = URL(string: "\(prefixUrl)/posts") else {
             print("URL não encontrada")
@@ -34,9 +36,9 @@ class  ViewModel: ObservableObject {
             
             do {
                 if let data = data {
-                    let result = try JSONDecoder().decode(Tarefa.self, from: data)
+                    let result = try JSONDecoder().decode([PostModel].self, from: data)
                     DispatchQueue.main.async {
-                        self.items = result.data
+                        self.items = result
                     }
                 }else {
                     
@@ -50,9 +52,12 @@ class  ViewModel: ObservableObject {
         }.resume()
     }
     
-    //MARK: - Create DATA ----------------------
+    
+    
+    
+    //MARK: - Create DATA ------------------------------------------------------------------
     func createPost(parameters: [String: Any]) {
-        guard let url = URL(string: "\(prefixUrl)/createTarefa") else {
+        guard let url = URL(string: "\(prefixUrl)/posts") else {
             print("URL não encontrada")
             return
         }
@@ -73,7 +78,7 @@ class  ViewModel: ObservableObject {
             
             do {
                 if let data = data {
-                    let result = try JSONDecoder().decode(Tarefa.self, from: data)
+                    let result = try JSONDecoder().decode(DataModel.self, from: data)
                     DispatchQueue.main.async {
                         print(result)
                     }
@@ -90,9 +95,12 @@ class  ViewModel: ObservableObject {
     }
     
     //MARK: - Update DATA ----------------------
-    func updatePost(parameters: [String: Any]) {
-        guard let url = URL(string: "\(prefixUrl)/updatePost") else {
-            print("URL não encontrada")
+    func updatePost(parameters: [String: Any], id: Int ) {
+        
+        
+        
+        guard let url = URL(string: "\(prefixUrl)/posts/\(id)") else {
+            print("URL não encontrada\(id)")
             return
         }
         
@@ -112,7 +120,7 @@ class  ViewModel: ObservableObject {
             
             do {
                 if let data = data {
-                    let result = try JSONDecoder().decode(Tarefa.self, from: data)
+                    let result = try JSONDecoder().decode(DataModel.self, from: data)
                     DispatchQueue.main.async {
                         print(result)
                     }
@@ -128,10 +136,11 @@ class  ViewModel: ObservableObject {
         }.resume()
     }
     
-    //MARK: - delete DATA ----------------------
-    func deletePost(parameters: [String: Any]) {
-        guard let url = URL(string: "\(prefixUrl)/deletePost") else {
-            print("URL não encontrada")
+    //MARK: - delete DATA ----------------------------------------------------------------------------------------
+    func deletePost(parameters: [String: Any], id : Int ) {
+        
+        guard let url = URL(string: "\(prefixUrl)/posts/\(id)") else {
+            print("URL não encontrada\(id)")
             return
         }
         
@@ -151,7 +160,7 @@ class  ViewModel: ObservableObject {
             
             do {
                 if let data = data {
-                    let result = try JSONDecoder().decode(Tarefa.self, from: data)
+                    let result = try JSONDecoder().decode([PostModel].self, from: data)
                     DispatchQueue.main.async {
                         print(result)
                     }

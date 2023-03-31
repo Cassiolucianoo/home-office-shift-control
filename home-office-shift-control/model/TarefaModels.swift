@@ -8,17 +8,15 @@
 import Foundation
 import SwiftUI
 
-struct Tarefa: Decodable{
+struct DataModel: Decodable{
     
-    let tarefa: String
-    let tempoInicio: String
-    let tempoFim: String
-    let descricao: String
-    let data: [PostTarefa]
+    let error: Bool
+    let message: String
+    let data: [PostModel]
     
 }
 
-struct PostTarefa: Decodable {
+struct PostModel: Decodable {
     let id: Int
     let title: String
     let post : String
