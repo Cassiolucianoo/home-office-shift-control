@@ -18,7 +18,7 @@ struct ContentView: View {
         @State var title = ""
         @State var post = ""
         @State var tempo = ""
-        @State var data = ""
+        @State var date = ""
         
         var body: some View {
             
@@ -43,21 +43,15 @@ struct ContentView: View {
                                         .frame(minWidth: 75, idealWidth: 75, maxWidth: .infinity, minHeight: 75, idealHeight: 75, maxHeight: .infinity, alignment: .center)
                                      .padding(.horizontal)
                                      // .border(Color.gray.opacity(0.5))
-                                    
-                                  
+                        
                                     HStack(alignment: .center){
-                                        Text("DATA: 11/05 Incio 17:50 fim 18:40 ")
+                                        Text("DATA: \(item.date) ")
                                             .font(.caption)
                                             .foregroundColor(.gray)
                                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                             .multilineTextAlignment(.center)
                                             .frame(maxWidth: .infinity, alignment: .center)
-                                            //.background(Color.gray.opacity(0.1))
-                                        
-                                        
-                                        
-                                        
-                                        
+                                    //.background(Color.gray.opacity(0.1))
                                     }
                                 }
     
@@ -73,7 +67,7 @@ struct ContentView: View {
                 .navigationBarTitle("Tarefas")
                 .navigationBarItems(trailing: plusButton)
             }.sheet(isPresented: $isPresentedNewPost, content: {
-                NewPostView(title: $title, post: $post, isPresented: $isPresentedNewPost)
+                NewPostView(title: $title, post: $post, date: $date, isPresented: $isPresentedNewPost)
                 
             })
         }
@@ -90,9 +84,6 @@ struct ContentView: View {
                 print("Id enviado para api \(ids)")
             }
         }
-        
-        
-        
         
         var plusButton:  some View{
             Button(action: {
