@@ -16,7 +16,9 @@ struct ContentView: View {
         @EnvironmentObject var viewModel: ViewModel
         @State var isPresentedNewPost = false
         @State var title = ""
-        @State  var post = ""
+        @State var post = ""
+        @State var tempo = ""
+        @State var data = ""
         
         var body: some View {
             
@@ -30,16 +32,43 @@ struct ContentView: View {
                             label: {
                                 VStack(alignment: .leading){
                                     Text(item.title)
+                                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                           
                                     Text(item.post)
+                                      .fontWeight(.bold)
                                         .font(.caption)
                                         .foregroundColor(.gray)
+                                        .fontWeight(.bold)
+                         
+                                        .frame(minWidth: 75, idealWidth: 75, maxWidth: .infinity, minHeight: 75, idealHeight: 75, maxHeight: .infinity, alignment: .center)
+                                     .padding(.horizontal)
+                                     // .border(Color.gray.opacity(0.5))
+                                    
+                                  
+                                    HStack(alignment: .center){
+                                        Text("DATA: 11/05 Incio 17:50 fim 18:40 ")
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                            .multilineTextAlignment(.center)
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                            //.background(Color.gray.opacity(0.1))
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    }
                                 }
-                                
+    
                             }
                         )
-                    }.onDelete(perform: deletePost)
-                    
-                    
+                        
+                    }
+                    .onDelete(perform: deletePost)
+                    .background(Color.gray .opacity(0.1))
+                    .cornerRadius(10)
+
                 }.listStyle(InsetListStyle())
                 .navigationBarTitle("Tarefas")
                 .navigationBarItems(trailing: plusButton)
@@ -62,6 +91,9 @@ struct ContentView: View {
             }
         }
         
+        
+        
+        
         var plusButton:  some View{
             Button(action: {
                 isPresentedNewPost.toggle()
@@ -79,3 +111,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

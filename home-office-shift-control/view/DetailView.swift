@@ -53,8 +53,6 @@ struct DetailView: View {
                 let parameters: [String: Any] = ["id": item.id, "title": title, "post": post]
                 let id  = item.id
                 viewwModel.updatePost(parameters: parameters, id: id)
-                
-                
                 viewwModel.fetchPost()
                 presentationMode.wrappedValue.dismiss()
                 print(item.id)
