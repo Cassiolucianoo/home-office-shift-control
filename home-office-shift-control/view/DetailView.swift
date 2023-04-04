@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var title = ""
-    @State  var post = ""
+    @State  var description = ""
     let item : PostModel
     @EnvironmentObject var viewwModel: ViewModel
     
@@ -28,7 +28,7 @@ struct DetailView: View {
                     .cornerRadius(6)
                     .padding(.bottom)
                 
-                TextField("Descrição da tarefa", text: $post)
+                TextField("Descrição da tarefa", text: $description)
                     .padding()
                     .background(Color.white)
                     .cornerRadius(6)
@@ -38,7 +38,7 @@ struct DetailView: View {
             }.padding()
             .onAppear(perform: {
                 self.title = item.title
-                self.post = item.post
+                self.description = item.description
             })
         }
         .navigationBarTitle("Editar tarefa realisada", displayMode: .inline)
@@ -49,8 +49,8 @@ struct DetailView: View {
     var trailing: some View{
         Button(action: {
             
-            if title != "" && post != "" {
-                let parameters: [String: Any] = ["id": item.id, "title": title, "post": post]
+            if title != "" && description != "" {
+                let parameters: [String: Any] = ["id": item.id, "title": title, "description": description]
                 let id  = item.id
                 viewwModel.updatePost(parameters: parameters, id: id)
                 viewwModel.fetchPost()

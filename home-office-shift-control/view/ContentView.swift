@@ -16,7 +16,7 @@ struct ContentView: View {
         @EnvironmentObject var viewModel: ViewModel
         @State var isPresentedNewPost = false
         @State var title = ""
-        @State var post = ""
+        @State var description = ""
         @State var tempo = ""
         @State var date = ""
         
@@ -33,17 +33,17 @@ struct ContentView: View {
                                 VStack(alignment: .leading){
                                     Text(item.title)
                                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                           
-                                    Text(item.post)
-                                      .fontWeight(.bold)
+                                    
+                                    Text(item.description)
+                                        .fontWeight(.bold)
                                         .font(.caption)
                                         .foregroundColor(.gray)
                                         .fontWeight(.bold)
-                         
+                                        
                                         .frame(minWidth: 75, idealWidth: 75, maxWidth: .infinity, minHeight: 75, idealHeight: 75, maxHeight: .infinity, alignment: .center)
-                                     .padding(.horizontal)
-                                     // .border(Color.gray.opacity(0.5))
-                        
+                                        .padding(.horizontal)
+                                    // .border(Color.gray.opacity(0.5))
+                                    
                                     HStack(alignment: .center){
                                         Text("DATA: \(item.date) ")
                                             .font(.caption)
@@ -51,10 +51,10 @@ struct ContentView: View {
                                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                             .multilineTextAlignment(.center)
                                             .frame(maxWidth: .infinity, alignment: .center)
-                                    //.background(Color.gray.opacity(0.1))
+                                        //.background(Color.gray.opacity(0.1))
                                     }
                                 }
-    
+                                
                             }
                         )
                         
@@ -62,16 +62,15 @@ struct ContentView: View {
                     .onDelete(perform: deletePost)
                     .background(Color.gray .opacity(0.1))
                     .cornerRadius(10)
-
+                    
                 }.listStyle(InsetListStyle())
                 .navigationBarTitle("Tarefas")
                 .navigationBarItems(trailing: plusButton)
             }.sheet(isPresented: $isPresentedNewPost, content: {
-                NewPostView(title: $title, post: $post, date: $date, isPresented: $isPresentedNewPost)
+                NewPostView(title: $title, description: $description, date: $date, isPresented: $isPresentedNewPost)
                 
             })
         }
-        
         
         private func deletePost(indexSet: IndexSet){
             let id =  indexSet.map {viewModel.items[$0].id}
@@ -89,7 +88,7 @@ struct ContentView: View {
             Button(action: {
                 isPresentedNewPost.toggle()
                 title = ""
-                post = ""
+                description = ""
                 print(" + precionado")
             }, label: {
                 Image(systemName: "plus")
@@ -102,4 +101,7 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+
 
