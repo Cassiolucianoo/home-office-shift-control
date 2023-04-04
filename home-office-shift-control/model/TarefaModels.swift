@@ -20,5 +20,5 @@ struct PostModel: Decodable {
     let id: Int
     let title: String
     let post : String
-    
+    let date : String
 }

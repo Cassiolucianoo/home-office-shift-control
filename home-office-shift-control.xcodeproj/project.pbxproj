@@ -15,6 +15,8 @@
 		DF6F323E29CEB64700E06F7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF6F323D29CEB64700E06F7B /* Preview Assets.xcassets */; };
 		DF79981529D5756A00AFDC8B /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF79981429D5756A00AFDC8B /* NewPostView.swift */; };
 		DF79981729D5825200AFDC8B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF79981629D5825200AFDC8B /* DetailView.swift */; };
+		DF805D6D29DA860E00D5DF65 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805D6C29DA860E00D5DF65 /* SwiftUIView.swift */; };
+		DF805D6F29DA925C00D5DF65 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805D6E29DA925C00D5DF65 /* DateFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		DF6F323F29CEB64700E06F7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF79981429D5756A00AFDC8B /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
 		DF79981629D5825200AFDC8B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		DF805D6C29DA860E00D5DF65 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		DF805D6E29DA925C00D5DF65 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,7 @@
 				DF5DBBAB29D16C6300B37585 /* ContentView.swift */,
 				DF79981429D5756A00AFDC8B /* NewPostView.swift */,
 				DF79981629D5825200AFDC8B /* DetailView.swift */,
+				DF805D6C29DA860E00D5DF65 /* SwiftUIView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -86,6 +91,7 @@
 		DF6F323529CEB64500E06F7B /* home-office-shift-control */ = {
 			isa = PBXGroup;
 			children = (
+				DF805D6E29DA925C00D5DF65 /* DateFormat.swift */,
 				DF5DBBAC29D16C6300B37585 /* model */,
 				DF5DBBA929D16C6300B37585 /* view */,
 				DF5DBBAE29D16C6300B37585 /* ViewModel */,
@@ -175,8 +181,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF5DBBB229D16C6300B37585 /* TarefaModels.swift in Sources */,
+				DF805D6D29DA860E00D5DF65 /* SwiftUIView.swift in Sources */,
 				DF79981729D5825200AFDC8B /* DetailView.swift in Sources */,
 				DF79981529D5756A00AFDC8B /* NewPostView.swift in Sources */,
+				DF805D6F29DA925C00D5DF65 /* DateFormat.swift in Sources */,
 				DF5DBBB129D16C6300B37585 /* ContentView.swift in Sources */,
 				DF6F323729CEB64500E06F7B /* home_office_shift_controlApp.swift in Sources */,
 				DF598D9029D2BCC90028E5BE /* ViewModel.swift in Sources */,

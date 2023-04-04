@@ -7,13 +7,25 @@
 
 import SwiftUI
 
+
+
+// formato da data
+//var formate: DateFormatter {
+//   let dateFormatter = DateFormatter()
+//   dateFormatter.dateFormat = "dd-mm-yy HH:mm:ss"
+//   return dateFormatter
+//}
 struct NewPostView: View {
     @Binding var title :String
     @Binding var post: String
+    @Binding var date: String
     @Binding var isPresented: Bool
     @EnvironmentObject var viewwModel: ViewModel
     @State var isAlert = false
     @State private var wordCount: Int = 0
+   @State private var dataSelecionada = Date()
+    
+    private let dateFormatte = formate
     
     var body: some View {
         NavigationView{
@@ -28,6 +40,15 @@ struct NewPostView: View {
                         .background(Color.white)
                         .cornerRadius(6)
                         .padding(.bottom)
+                    
+                   
+                        DatePicker("Data: ", selection: $dataSelecionada)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(6)
+                            .padding(.bottom)
+                  
+                   
                     
     
                     ZStack(alignment: .topTrailing) {
@@ -47,6 +68,8 @@ struct NewPostView: View {
                                     .font(.headline)
                                     .foregroundColor(.secondary)
                                     .padding(.trailing)
+                        
+                       
                             }
                     
                     
@@ -75,8 +98,11 @@ struct NewPostView: View {
     
     var trailing: some View{
         Button(action: {
+            
+            date =  dateFormatte.string(from: self.dataSelecionada)
+        
             if title != "" && post != "" {
-                let parameters: [String: Any] = ["title" : title, "post":post]
+                let parameters: [String: Any] = ["title" : title, "post":post, "date":dateFormatte.string(from: self.dataSelecionada)]
                 viewwModel.createPost(parameters: parameters)
                 viewwModel.fetchPost()
                 isPresented.toggle()
@@ -90,4 +116,12 @@ struct NewPostView: View {
         })
     }
     
+}
+
+extension DateFormatter {
+    static var formate: DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-mm-yy HH:mm:ss"
+        return dateFormatter
+    }
 }
