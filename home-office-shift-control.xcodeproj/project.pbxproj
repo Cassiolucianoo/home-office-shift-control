@@ -11,6 +11,7 @@
 		DF598D9029D2BCC90028E5BE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF598D8F29D2BCC90028E5BE /* ViewModel.swift */; };
 		DF5DBBB129D16C6300B37585 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAB29D16C6300B37585 /* ContentView.swift */; };
 		DF5DBBB229D16C6300B37585 /* TarefaModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAD29D16C6300B37585 /* TarefaModels.swift */; };
+		DF678AFE29E49EC400FC38C2 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF678AFD29E49EC400FC38C2 /* File.swift */; };
 		DF6F323729CEB64500E06F7B /* home_office_shift_controlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F323629CEB64500E06F7B /* home_office_shift_controlApp.swift */; };
 		DF6F323B29CEB64700E06F7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF6F323A29CEB64700E06F7B /* Assets.xcassets */; };
 		DF6F323E29CEB64700E06F7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF6F323D29CEB64700E06F7B /* Preview Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		DF598D8F29D2BCC90028E5BE /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		DF5DBBAB29D16C6300B37585 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DF5DBBAD29D16C6300B37585 /* TarefaModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TarefaModels.swift; sourceTree = "<group>"; };
+		DF678AFD29E49EC400FC38C2 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		DF6F323329CEB64500E06F7B /* home-office-shift-control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "home-office-shift-control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6F323629CEB64500E06F7B /* home_office_shift_controlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home_office_shift_controlApp.swift; sourceTree = "<group>"; };
 		DF6F323A29CEB64700E06F7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		DF6F323529CEB64500E06F7B /* home-office-shift-control */ = {
 			isa = PBXGroup;
 			children = (
+				DF678AFD29E49EC400FC38C2 /* File.swift */,
 				DF805D6E29DA925C00D5DF65 /* DateFormat.swift */,
 				DF4E95D429DB8C0A0034C7A7 /* TextLimiter.swift */,
 				DF5DBBAC29D16C6300B37585 /* model */,
@@ -187,6 +190,7 @@
 				DF5DBBB129D16C6300B37585 /* ContentView.swift in Sources */,
 				DF6F323729CEB64500E06F7B /* home_office_shift_controlApp.swift in Sources */,
 				DF598D9029D2BCC90028E5BE /* ViewModel.swift in Sources */,
+				DF678AFE29E49EC400FC38C2 /* File.swift in Sources */,
 				DF4E95D529DB8C0A0034C7A7 /* TextLimiter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

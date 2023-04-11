@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct NewPostView: View {
     @Binding var title :String
     @Binding var description: String
@@ -21,67 +20,63 @@ struct NewPostView: View {
     @ObservedObject private var inputDescription = TextLimiter(limit: 100)
     private let dateFormatte = formate
     
+    
     var body: some View {
         NavigationView{
-            ZStack{
-                Color.gray.opacity(0.1).edgesIgnoringSafeArea(.all)
-                VStack(alignment: .leading){
-                    Text("Titulo da tarefa")
-                        .font(Font.system(size: 16, weight:.bold))
-                    
-                    TextField("Exemplo : Desenvolvendo projeto java ", text: $inputTitle.value)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(6)
-                        .padding(.bottom)
-                    
-                    Text("Data")
-                        .font(Font.system(size: 16, weight:.bold))
-                    
-                    DatePicker("Tarefa iniciada em: ", selection: $dataSelecionada)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(6)
-                        .padding(.bottom)
-                    VStack{
-                        HStack{
-                            Text("Detalhes")
-                                .font(Font.system(size: 16, weight:.bold))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .font(.headline)
-                            Text("\(self.wordCount) Caracteres")
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                                .font(.headline)
-                                .foregroundColor(.secondary)
-                            //.padding(.trailing)
-                        }
-                        TextEditor(text: $inputDescription.value)
-                            .cornerRadius(6)
-                            .font(.body)
-                            
-                            .onChange(of: inputDescription.value , perform: { value in
-                                let words = value.count
-                                self.wordCount = words
-                            })
-                    }
-                    Spacer()
-                }.padding()
-                .alert(isPresented: $isAlert) {
-                    let title = Text("CAMPOS EM BRANCO")
-                    let message = Text("Todos os campos são obrigatorios!")
-                    return Alert(title: title, message: message)
+            
+            Form {
+                Section(header: Text("Informçãoes")){
+                    TextField("Titulo da tarefa", text: $inputTitle.value)
+                    DatePicker("Data inicio: ", selection: $dataSelecionada)
+                }
+                Section(header: Text ("Detalhes"), footer: Footer(wordCounts: $wordCount)) {
+                    TextEditor(text: $inputDescription.value)
+                        .frame( maxHeight: 150)
                 }
             }
+            .accentColor(.red)
+            .navigationTitle("Criar tarefa")
+            
+            .onChange(of: inputDescription.value , perform: { value in
+                print("Contin Entrada da tecla\(self.wordCount)")
+                let words = value.count
+                self.wordCount = words
+            })
+            
+            .alert(isPresented: $isAlert) {
+                let title = Text("CAMPOS EM BRANCO")
+                let message = Text("Todos os campos são obrigatorios!")
+                return Alert(title: title, message: message)
+            }
+            
             .navigationBarTitle("Nova tarefa", displayMode: .inline)
             .navigationBarItems(leading: leading, trailing: trailing)
+        }  .onTapGesture {
+            hideKeybord()
+        }
+        
+    }
+    
+    struct Footer: View {
+        @Binding var wordCounts: Int
+        var body: some View {
+            Text ("\(wordCounts) Caracteres")
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .font(.system(size: 15))
+                .foregroundColor(.secondary)
         }
     }
+    
     var leading: some View{
         Button(action: {
             print("Cancelar  4558")
             isPresented.toggle()
         }, label: {
-            Text("Cancela")
+            Image(systemName: "x.circle.fill")
+                .foregroundColor(.red)
+                .font(.system(size: 30))
+               
+            
             
         })
     }
@@ -100,7 +95,10 @@ struct NewPostView: View {
                 isAlert.toggle()
             }
         }, label: {
-            Text("Adicionar")
+            Image(systemName: "doc.fill.badge.plus")
+                .foregroundColor(.green)
+                .font(.system(size: 30))
         })
     }
+    
 }
