@@ -19,6 +19,6 @@ struct DataModel: Decodable{
 struct PostModel: Decodable {
     let id: Int
     let title: String
-    let post : String
+    let description : String
     let date : String
 }

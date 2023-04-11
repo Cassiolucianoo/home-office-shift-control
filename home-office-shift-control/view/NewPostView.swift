@@ -7,82 +7,63 @@
 
 import SwiftUI
 
-
-
-// formato da data
-//var formate: DateFormatter {
-//   let dateFormatter = DateFormatter()
-//   dateFormatter.dateFormat = "dd-mm-yy HH:mm:ss"
-//   return dateFormatter
-//}
 struct NewPostView: View {
     @Binding var title :String
-    @Binding var post: String
+    @Binding var description: String
     @Binding var date: String
     @Binding var isPresented: Bool
     @EnvironmentObject var viewwModel: ViewModel
     @State var isAlert = false
     @State private var wordCount: Int = 0
-   @State private var dataSelecionada = Date()
-    
+    @State private var dataSelecionada = Date()
+    @ObservedObject private var inputTitle = TextLimiter(limit: 60)
+    @ObservedObject private var inputDescription = TextLimiter(limit: 100)
     private let dateFormatte = formate
+    
     
     var body: some View {
         NavigationView{
-            ZStack{
-                Color.gray.opacity(0.1).edgesIgnoringSafeArea(.all)
-                VStack(alignment: .leading){
-                    Text("Crear uma nova tarefa")
-                        .font(Font.system(size: 16, weight:.bold))
-                    
-                    TextField("Titulo da atividade", text: $title)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(6)
-                        .padding(.bottom)
-                    
-                   
-                        DatePicker("Data: ", selection: $dataSelecionada)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(6)
-                            .padding(.bottom)
-                  
-                   
-                    
-    
-                    ZStack(alignment: .topTrailing) {
-                                TextEditor(text: $post)
-                                    .cornerRadius(6)
-                                    .font(.body)
-                                    .padding(.top, 15)
-                                    //.keyboardType(.asciiCapable)
-                                    .onChange(of: post, perform: { value in
-                                        let words = value.count
-                                        self.wordCount = words
-                                        
-                                        
-                                    })
-                                    .padding(.top, 15)
-                                Text("\(wordCount) Palavras")
-                                    .font(.headline)
-                                    .foregroundColor(.secondary)
-                                    .padding(.trailing)
-                        
-                       
-                            }
-                    
-                    
-                    Spacer()
-                }.padding()
-                .alert(isPresented: $isAlert) {
-                    let title = Text("CAMPOS EM BRANCO")
-                    let message = Text("Todos os campos são obrigatorios!")
-                    return Alert(title: title, message: message)
+            
+            Form {
+                Section(header: Text("Informçãoes")){
+                    TextField("Titulo da tarefa", text: $inputTitle.value)
+                    DatePicker("Data inicio: ", selection: $dataSelecionada)
+                }
+                Section(header: Text ("Detalhes"), footer: Footer(wordCounts: $wordCount)) {
+                    TextEditor(text: $inputDescription.value)
+                        .frame( maxHeight: 150)
                 }
             }
+            .accentColor(.red)
+            .navigationTitle("Criar tarefa")
+            
+            .onChange(of: inputDescription.value , perform: { value in
+                print("Contin Entrada da tecla\(self.wordCount)")
+                let words = value.count
+                self.wordCount = words
+            })
+            
+            .alert(isPresented: $isAlert) {
+                let title = Text("CAMPOS EM BRANCO")
+                let message = Text("Todos os campos são obrigatorios!")
+                return Alert(title: title, message: message)
+            }
+            
             .navigationBarTitle("Nova tarefa", displayMode: .inline)
             .navigationBarItems(leading: leading, trailing: trailing)
+        }  .onTapGesture {
+            hideKeybord()
+        }
+        
+    }
+    
+    struct Footer: View {
+        @Binding var wordCounts: Int
+        var body: some View {
+            Text ("\(wordCounts) Caracteres")
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .font(.system(size: 15))
+                .foregroundColor(.secondary)
         }
     }
     
@@ -91,37 +72,33 @@ struct NewPostView: View {
             print("Cancelar  4558")
             isPresented.toggle()
         }, label: {
-            Text("Cancela")
+            Image(systemName: "x.circle.fill")
+                .foregroundColor(.red)
+                .font(.system(size: 30))
+               
+            
             
         })
     }
-    
     var trailing: some View{
         Button(action: {
-            
+            title = inputTitle.value
+            description = inputDescription.value
             date =  dateFormatte.string(from: self.dataSelecionada)
-        
-            if title != "" && post != "" {
-                let parameters: [String: Any] = ["title" : title, "post":post, "date":dateFormatte.string(from: self.dataSelecionada)]
+            
+            if title != "" && description != "" {
+                let parameters: [String: Any] = ["title" : title, "description":description, "date":dateFormatte.string(from: self.dataSelecionada)]
                 viewwModel.createPost(parameters: parameters)
                 viewwModel.fetchPost()
                 isPresented.toggle()
-                
             }else {
                 isAlert.toggle()
             }
         }, label: {
-            Text("publicar")
-            
+            Image(systemName: "doc.fill.badge.plus")
+                .foregroundColor(.green)
+                .font(.system(size: 30))
         })
     }
     
-}
-
-extension DateFormatter {
-    static var formate: DateFormatter {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-mm-yy HH:mm:ss"
-        return dateFormatter
-    }
 }

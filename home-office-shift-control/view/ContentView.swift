@@ -16,62 +16,68 @@ struct ContentView: View {
         @EnvironmentObject var viewModel: ViewModel
         @State var isPresentedNewPost = false
         @State var title = ""
-        @State var post = ""
+        @State var description = ""
         @State var tempo = ""
         @State var date = ""
         
         var body: some View {
-            
+        
             NavigationView{
                 List {
                     ForEach(viewModel.items, id: \.id){ item in
                         
-                        NavigationLink(
-                            
-                            destination: DetailView(item: item),
-                            label: {
-                                VStack(alignment: .leading){
-                                    Text(item.title)
-                                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                           
-                                    Text(item.post)
-                                      .fontWeight(.bold)
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-                                        .fontWeight(.bold)
-                         
-                                        .frame(minWidth: 75, idealWidth: 75, maxWidth: .infinity, minHeight: 75, idealHeight: 75, maxHeight: .infinity, alignment: .center)
-                                     .padding(.horizontal)
-                                     // .border(Color.gray.opacity(0.5))
-                        
-                                    HStack(alignment: .center){
-                                        Text("DATA: \(item.date) ")
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
-                                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                            .multilineTextAlignment(.center)
-                                            .frame(maxWidth: .infinity, alignment: .center)
-                                    //.background(Color.gray.opacity(0.1))
-                                    }
-                                }
-    
-                            }
+                        NavigationLink(destination: DetailView(item: item),
+                                       label: {
+                                        
+                                        HStack{
+                                            HStack{
+                                                VStack(spacing: 30){
+                                                    HStack {
+                                                        Image(systemName: "checkmark.circle")
+                                                            .foregroundColor(.white)
+                                                            .font(.system(size: 25))
+                                                            .frame(width: 25, height: 25)
+                                                            .background(Circle().fill(Color.green))
+                                                            .padding(.leading, 10)
+                                                        Text(item.title)
+                                                            .font(.callout)
+                                                            .bold()
+                                                            .lineLimit(1)
+                                                            .foregroundColor(.green)
+                                                        Spacer()
+                                                        
+                                                    }
+                                                    HStack {
+                                                        Text(item.description)
+                                                            .font(.system(size: 12))
+                                                            .lineLimit(7)
+                                                        Spacer()
+                                                    }
+                                                    Text(item.date)
+                                                        .font(.caption)
+                                                        .lineLimit(1)
+                                                }
+                                            }
+                                            .padding()
+                                            .background(Color(UIColor.secondarySystemGroupedBackground))
+                                            .background(Rectangle().fill(Color.white))
+                                            .cornerRadius(10)
+                                            .shadow(color: .gray, radius: 3, x: 2, y: 2)
+                                            
+                                        }
+                                        
+                                       }
                         )
-                        
                     }
                     .onDelete(perform: deletePost)
-                    .background(Color.gray .opacity(0.1))
-                    .cornerRadius(10)
-
+                    .shadow(color: .gray, radius: 3, x: 2, y: 2)
                 }.listStyle(InsetListStyle())
                 .navigationBarTitle("Tarefas")
                 .navigationBarItems(trailing: plusButton)
             }.sheet(isPresented: $isPresentedNewPost, content: {
-                NewPostView(title: $title, post: $post, date: $date, isPresented: $isPresentedNewPost)
-                
+                NewPostView(title: $title, description: $description, date: $date, isPresented: $isPresentedNewPost)
             })
         }
-        
         
         private func deletePost(indexSet: IndexSet){
             let id =  indexSet.map {viewModel.items[$0].id}
@@ -89,10 +95,11 @@ struct ContentView: View {
             Button(action: {
                 isPresentedNewPost.toggle()
                 title = ""
-                post = ""
+                description = ""
                 print(" + precionado")
             }, label: {
-                Image(systemName: "plus")
+                Image(systemName: "plus.circle.fill")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
             })
         }
     }
@@ -102,4 +109,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-

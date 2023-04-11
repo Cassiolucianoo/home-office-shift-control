@@ -30,7 +30,8 @@ class  ViewModel: ObservableObject {
         }
         URLSession.shared.dataTask(with: url){ (data, res, error)in
             if error != nil {
-                print("error", error?.localizedDescription ?? "")
+                print("URL não encontrada ------------------------------------------------------------------ 2", error?.localizedDescription ?? "")
+               
                 return
             }
             
