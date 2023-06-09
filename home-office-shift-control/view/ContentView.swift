@@ -11,10 +11,13 @@ struct ContentView: View {
     
     @EnvironmentObject var viewModel: ViewModel
     @State var isPresentedNewPost = false
+    @State var isDetailViewPresented = false
     @State var title = ""
     @State var description = ""
     @State var tempo = ""
     @State var date = ""
+    @State private var selectedItem: PostModel? = nil
+
     
     let fruits = ["Apple", "Banana", "Orange"]
     
@@ -23,63 +26,85 @@ struct ContentView: View {
         
         NavigationView{
             List {
-                // ForEach(viewModel.items, id: \.id){ item in
-                ForEach(fruits, id: \.self) { fruit in
+                 ForEach(viewModel.items, id: \.id){ item in
+               // ForEach(fruits, id: \.self) { fruit in
                     
                     // NavigationLink(destination: DetailView(),
                     //label: {
                     
-                    HStack{
+                    Button(action: {
+                        selectedItem = item
+
+                        isDetailViewPresented = true
+                        print("Botão selecionado")
+                    }) {
+
                         HStack{
-                            VStack(spacing: 30){
-                                HStack {
-                                    Image(systemName: "checkmark.circle")
-                                    //.foregroundColor(.white)
-                                        .font(.system(size: 25))
-                                        .frame(width: 25, height: 25)
-                                    // .background(Circle().fill(Color.green))
-                                        .padding(.leading, 10)
-                                    // Text(item.title)
-                                    Text("Titulo 1")
-                                        .font(.callout)
-                                        .bold()
-                                        .lineLimit(1)
-                                    //.foregroundColor(.green)
-                                    Spacer()
+                            HStack{
+                                VStack(spacing: 30){
+                                    HStack {
+                                        Image(systemName: "checkmark.circle")
+                                            .font(.system(size: 25))
+                                            .frame(width: 25, height: 25)
+                                            .padding(.leading, 10)
+                                        
+                                         Text(item.title)
+                                        
+                                       Text("Titulo 1")
+                                            .font(.callout)
+                                            .bold()
+                                            .lineLimit(1)
+                                        //.foregroundColor(.green)
+                                        Spacer()
+                                        
+                                    }
+                                    HStack {
+                                        
+                                        Text(item.description)
+                                        
+                                        
+                                       Text("Texto de descrição da tarefa")
+                                            .font(.system(size: 12))
+                                            .lineLimit(7)
+                                        Spacer()
+                                    }
                                     
+                                     Text(item.date)
+                                    
+                                    
+                                    Text("Data: 21 / 09 / 1988")
+                                        .font(.caption)
+                                        .lineLimit(1)
                                 }
-                                HStack {
-                                    // Text(item.description)
-                                    Text("Texto de descrição da tarefa")
-                                        .font(.system(size: 12))
-                                        .lineLimit(7)
-                                    Spacer()
-                                }
-                                // Text(item.date)
-                                Text("Data: 21 / 09 / 1988")
-                                    .font(.caption)
-                                    .lineLimit(1)
                             }
+                            .padding()
+                            .background(Color(UIColor.secondarySystemGroupedBackground))
+                            .background(Rectangle().fill(Color.black))
+                            
+                            .cornerRadius(10) // Define o raio do canto arredondado
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.black, lineWidth: 2) // Define a cor e a largura da linha
+                            )
                         }
-                        .padding()
-                        .background(Color(UIColor.secondarySystemGroupedBackground))
-                        .background(Rectangle().fill(Color.black))
-                        
-                        .cornerRadius(10) // Define o raio do canto arredondado
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.black, lineWidth: 2) // Define a cor e a largura da linha
-                        )
-                        // }
+
                     }
-                    //)
+                   
+                    .sheet(isPresented: $isDetailViewPresented) {
+                        if let item = selectedItem {
+                            DetailView(item: item)
+                        }
+                    }
                 }
                 .onDelete(perform: deletePost)
-                //.shadow(color: .gray, radius: 3, x: 2, y: 2)
-            }.listStyle(InsetListStyle())
+                
+            }
+            .listStyle(InsetListStyle())
                 .navigationBarTitle("Tarefas")
                 .navigationBarItems(trailing: plusButton)
-        }.sheet(isPresented: $isPresentedNewPost, content: {
+        }
+       
+        .sheet(isPresented: $isPresentedNewPost, content: {
             NewPostView(title: $title, description: $description, date: $date, isPresented: $isPresentedNewPost)
         })
     }
@@ -115,3 +140,32 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+
+//NavigationView{
+//    List {
+//         ForEach(viewModel.items, id: \.id){ item in
+//       // ForEach(fruits, id: \.self) { fruit in
+//
+//            // NavigationLink(destination: DetailView(),
+//            //label: {
+//
+//            Button(action: {
+//               //positionItem = item
+//                //frutaEditada = frutas[fruta]
+//                //editando = true
+//               // isPresentedNewPost.toggle()
+//                DetailView()
+//                print("Botão selecionado")
+//            }) {
+//
+//                HStack{
+//                    HStack{
+//                        VStack(spacing: 30){
+//                            HStack {
+//                                Image(systemName: "checkmark.circle")
+//                                    .font(.system(size: 25))
+//                                    .frame(width: 25, height: 25)
+//                                    .padding(.leading, 10)
+//
