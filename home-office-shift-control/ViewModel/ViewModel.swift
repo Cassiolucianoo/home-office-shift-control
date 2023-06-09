@@ -25,12 +25,12 @@ class  ViewModel: ObservableObject {
     //MARK: - recuperar DATA ------------------------------------------------------------------
     func fetchPost() {
         guard let url = URL(string: "\(prefixUrl)/posts") else {
-            print("URL não encontrada")
+            print("Recupera error :  URL não encontrada")
             return
         }
         URLSession.shared.dataTask(with: url){ (data, res, error)in
             if error != nil {
-                print("URL não encontrada ------------------------------------------------------------------ 2", error?.localizedDescription ?? "")
+                print(" Recupera error fetch json error:  URL não encontrada ------------------------------------------------------------------ 2", error?.localizedDescription ?? "")
                
                 return
             }
@@ -41,15 +41,14 @@ class  ViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.items = result
                     }
-                }else {
-                    
-                    print("No data")
-                    
+                } else {
+                    print("Recupera error: No data")
                 }
-                
-            }catch let JsonError {
-                print("fetch json error: ", JsonError.localizedDescription)
+            } catch let jsonError {
+                print("Recupera error fetch json error:", jsonError.localizedDescription)
+                print("Recupera Os dados não puderam ser lidos porque não estão no formato correto.:", jsonError.localizedDescription)
             }
+
         }.resume()
     }
     
@@ -96,49 +95,49 @@ class  ViewModel: ObservableObject {
     }
     
     //MARK: - Update DATA ----------------------
-    func updatePost(parameters: [String: Any], id: Int ) {
-        
-        
-        
+    func updatePost<T: Encodable>(parameters: [String: T], id: Int) {
         guard let url = URL(string: "\(prefixUrl)/posts/\(id)") else {
-            print("URL não encontrada\(id)")
+            print("URL não encontrada: \(id)")
             return
         }
         
-        let data = try! JSONSerialization.data(withJSONObject: parameters)
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "PUT"
-        request.httpBody = data
-        request.setValue("application/json", forHTTPHeaderField:"Content-Type")
-        
-        
-        URLSession.shared.dataTask(with: request){ (data, res, error)in
-            if error != nil {
-                print("error", error?.localizedDescription ?? "")
-                return
-            }
+        do {
+            let jsonData = try JSONEncoder().encode(parameters)
             
-            do {
-                if let data = data {
-                    let result = try JSONDecoder().decode(DataModel.self, from: data)
-                    DispatchQueue.main.async {
-                        print(result)
-                    }
-                }else {
-                    
-                    print("No data")
-                    
+            var request = URLRequest(url: url)
+            request.httpMethod = "PUT"
+            request.httpBody = jsonData
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    print("Erro ao atualizar o post:", error.localizedDescription)
+                    return
                 }
                 
-            }catch let JsonError {
-                print("fetch json error: ", JsonError.localizedDescription)
-            }
-        }.resume()
+                if let data = data {
+                    do {
+                        let result = try JSONDecoder().decode(DataModel.self, from: data)
+                        DispatchQueue.main.async {
+                            print(result)
+                        }
+                    } catch {
+                        print("Erro ao decodificar a resposta:", error.localizedDescription)
+                    }
+                } else {
+                    print("Nenhum dado retornado")
+                }
+            }.resume()
+        } catch {
+            print("Erro ao codificar os parâmetros:", error.localizedDescription)
+        }
     }
+
     
     //MARK: - delete DATA ----------------------------------------------------------------------------------------
     func deletePost(parameters: [String: Any], id : Int ) {
+        
+        
         
         guard let url = URL(string: "\(prefixUrl)/posts/\(id)") else {
             print("URL não encontrada\(id)")

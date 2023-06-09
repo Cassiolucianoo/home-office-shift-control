@@ -19,7 +19,7 @@ struct ContentView: View {
     @State private var selectedItem: PostModel? = nil
 
     
-    let fruits = ["Apple", "Banana", "Orange"]
+    //let fruits = ["Apple", "Banana", "Orange"]
     
     
     var body: some View {
@@ -27,7 +27,7 @@ struct ContentView: View {
         NavigationView{
             List {
                  ForEach(viewModel.items, id: \.id){ item in
-               // ForEach(fruits, id: \.self) { fruit in
+                //ForEach(fruits, id: \.self) { fruit in
                     
                     // NavigationLink(destination: DetailView(),
                     //label: {
@@ -90,11 +90,7 @@ struct ContentView: View {
 
                     }
                    
-                    .sheet(isPresented: $isDetailViewPresented) {
-                        if let item = selectedItem {
-                            DetailView(item: item)
-                        }
-                    }
+                    
                 }
                 .onDelete(perform: deletePost)
                 
@@ -103,26 +99,43 @@ struct ContentView: View {
                 .navigationBarTitle("Tarefas")
                 .navigationBarItems(trailing: plusButton)
         }
-       
+        .onAppear {
+                   viewModel.fetchPost() // Chama a função para buscar os dados dos posts
+               }
+        .sheet(item: $selectedItem) { item in
+            DetailView(title: $title, description: $description, item: item)
+        }
+        
+//        .sheet(isPresented: $isDetailViewPresented) {
+//            if let item = selectedItem {
+//                DetailView(title: $title, description: $description, item: item)
+//
+//
+//            }
+//        }
         .sheet(isPresented: $isPresentedNewPost, content: {
             NewPostView(title: $title, description: $description, date: $date, isPresented: $isPresentedNewPost)
+            
         })
     }
     
-    private func deletePost(indexSet: IndexSet){
-        let id =  indexSet.map {viewModel.items[$0].id}
-        DispatchQueue.main.async {
+    private func deletePost(indexSet: IndexSet) {
+        if let firstIndex = indexSet.first {
+            let id = viewModel.items[firstIndex].id
             
-            let ids = id[0]
-            let parameters: [String: Any] = ["id": id[0]]
-            self.viewModel.deletePost(parameters: parameters, id : ids)
-            self.viewModel.fetchPost()
-            print("Id enviado para api \(ids)")
+            DispatchQueue.main.async {
+                let parameters: [String: Any] = ["id": id]
+                self.viewModel.deletePost(parameters: parameters, id: id)
+                self.viewModel.fetchPost()
+                print("Id enviado para api \(id)")
+            }
         }
     }
-    
+
+ 
     var plusButton:  some View{
         Button(action: {
+            
             isPresentedNewPost.toggle()
             title = ""
             description = ""
@@ -140,32 +153,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
-
-
-//NavigationView{
-//    List {
-//         ForEach(viewModel.items, id: \.id){ item in
-//       // ForEach(fruits, id: \.self) { fruit in
-//
-//            // NavigationLink(destination: DetailView(),
-//            //label: {
-//
-//            Button(action: {
-//               //positionItem = item
-//                //frutaEditada = frutas[fruta]
-//                //editando = true
-//               // isPresentedNewPost.toggle()
-//                DetailView()
-//                print("Botão selecionado")
-//            }) {
-//
-//                HStack{
-//                    HStack{
-//                        VStack(spacing: 30){
-//                            HStack {
-//                                Image(systemName: "checkmark.circle")
-//                                    .font(.system(size: 25))
-//                                    .frame(width: 25, height: 25)
-//                                    .padding(.leading, 10)
-//

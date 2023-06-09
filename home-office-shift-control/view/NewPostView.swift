@@ -75,9 +75,7 @@ struct NewPostView: View {
             Image(systemName: "x.circle.fill")
                 .foregroundColor(.red)
                 .font(.system(size: 30))
-               
-            
-            
+  
         })
     }
     var trailing: some View{
@@ -86,14 +84,22 @@ struct NewPostView: View {
             description = inputDescription.value
             date =  dateFormatte.string(from: self.dataSelecionada)
             
+            
+            
             if title != "" && description != "" {
-                let parameters: [String: Any] = ["title" : title, "description":description, "date":dateFormatte.string(from: self.dataSelecionada)]
+                let parameters: [String: Any] = ["title": title, "description": description, "date": dateFormatte.string(from: self.dataSelecionada)]
                 viewwModel.createPost(parameters: parameters)
-                viewwModel.fetchPost()
+                viewwModel.fetchPost() // Atualiza a lista imediatamente após adicionar o item
                 isPresented.toggle()
-            }else {
+                print("Adicionando")
+            } else {
                 isAlert.toggle()
             }
+
+
+            
+            
+            
         }, label: {
             Image(systemName: "doc.fill.badge.plus")
                 .foregroundColor(.green)
@@ -101,4 +107,5 @@ struct NewPostView: View {
         })
     }
     
+   
 }

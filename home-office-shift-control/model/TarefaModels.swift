@@ -8,17 +8,21 @@
 import Foundation
 import SwiftUI
 
-struct DataModel: Decodable{
-    
+struct DataModel: Decodable {
     let error: Bool
     let message: String
-    let data: [PostModel]
-    
+    let posts: [PostModel]
 }
 
-struct PostModel: Decodable {
+struct PostModel: Identifiable, Decodable {
     let id: Int
     let title: String
-    let description : String
-    let date : String
+    let description: String
+    let date: String
 }
+
+
+
+
+
+
