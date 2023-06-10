@@ -1,31 +1,25 @@
 //
-//  NewPostView.swift
+//  SwiftUIView.swift
 //  home-office-shift-control
 //
-//  Created by cassio on 30/03/23.
+//  Created by cassio on 09/06/23.
 //
 
 import SwiftUI
 
-struct NewPostView: View {
-    @Binding var title :String
-    @Binding var description: String
-    @Binding var date: String
-    @Binding var isPresented: Bool
-    @EnvironmentObject var viewwModel: ViewModel
+struct SwiftUIView: View {
+    
     @State var isAlert = false
-    @State private var wordCount: Int = 0
-    @State private var dataSelecionada = Date()
     @ObservedObject private var inputTitle = TextLimiter(limit: 60)
     @ObservedObject private var inputDescription = TextLimiter(limit: 100)
-    private let dateFormatte = formate
+    @State private var dataSelecionada = Date()
+    @State private var wordCount: Int = 0
     
-
     var body: some View {
         
         NavigationView{
-            VStack(spacing: 10){
-
+            VStack{
+                
                 Text("Titulo da tarefa")
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -38,14 +32,13 @@ struct NewPostView: View {
                             .stroke(Color.black, lineWidth: 2)
                     )
                 
-                DatePicker("Data inicio: ", selection: $dataSelecionada)
-                DatePicker(selection: /*@START_MENU_TOKEN@*/.constant(Date())/*@END_MENU_TOKEN@*/, label: { Text("Data").bold() })
+                DatePicker(selection: /*@START_MENU_TOKEN@*/.constant(Date())/*@END_MENU_TOKEN@*/, label: { Text("Data") })
                 
                 Text("Descrição")
-                    .bold()
+                
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                TextEditor(text: $inputDescription.value)
+                TextEditor(text: $inputTitle.value)
                     .frame(height: 200)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
@@ -53,14 +46,12 @@ struct NewPostView: View {
                     )
                 
                 Text ("\(wordCount) Caracteres")
+                    .padding()
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .font(.system(size: 15))
                     .foregroundColor(.black)
                 
-            }
-            
-            .padding()
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            }.padding()
                 .accentColor(.black)
                 .navigationTitle("Criar tarefa")
                 .onChange(of: inputDescription.value , perform: { value in
@@ -90,53 +81,47 @@ struct NewPostView: View {
         }
     }
     
-    struct Footer: View {
-        @Binding var wordCounts: Int
-        var body: some View {
-            Text ("\(wordCounts) Caracteres")
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .font(.system(size: 15))
-                .foregroundColor(.secondary)
-        }
-    }
-    
     var leading: some View{
         Button(action: {
             print("Cancelar  4558")
-            isPresented.toggle()
+            
         }, label: {
             Image(systemName: "x.circle.fill")
-                .foregroundColor(.black)
-                .font(.system(size: 25))
-  
+                .foregroundColor(.red)
+                .font(.system(size: 30))
         })
     }
     
     var trailing: some View{
         Button(action: {
-            title = inputTitle.value
-            description = inputDescription.value
-            date =  dateFormatte.string(from: self.dataSelecionada)
+            // title = inputTitle.value
+            // description = inputDescription.value
+            // date =  dateFormatte.string(from: self.dataSelecionada)
             
             
             
-            if title != "" && description != "" {
-                let parameters: [String: Any] = ["title": title, "description": description, "date": dateFormatte.string(from: self.dataSelecionada)]
-                viewwModel.createPost(parameters: parameters)
-                viewwModel.fetchPost() // Atualiza a lista imediatamente após adicionar o item
-                isPresented.toggle()
-                print("Adicionando")
-            } else {
-                isAlert.toggle()
-            }
-
+            //                if title != "" && description != "" {
+            //                    let parameters: [String: Any] = ["title": title, "description": description, "date": dateFormatte.string(from: self.dataSelecionada)]
+            //                    viewwModel.createPost(parameters: parameters)
+            //                    viewwModel.fetchPost() // Atualiza a lista imediatamente após adicionar o item
+            //                    isPresented.toggle()
+            //                    print("Adicionando")
+            //                } else {
+            //                    isAlert.toggle()
+            //                }
+            
             
         }, label: {
             Image(systemName: "doc.fill.badge.plus")
-                .foregroundColor(.black)
-                .font(.system(size: 25))
+                .foregroundColor(.green)
+                .font(.system(size: 30))
         })
     }
     
-   
+}
+
+struct SwiftUIView_Previews: PreviewProvider {
+    static var previews: some View {
+        SwiftUIView(  )
+    }
 }

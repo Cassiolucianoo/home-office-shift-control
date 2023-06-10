@@ -18,20 +18,12 @@ struct ContentView: View {
     @State var date = ""
     @State private var selectedItem: PostModel? = nil
 
-    
-    //let fruits = ["Apple", "Banana", "Orange"]
-    
-    
     var body: some View {
         
         NavigationView{
             List {
                  ForEach(viewModel.items, id: \.id){ item in
-                //ForEach(fruits, id: \.self) { fruit in
-                    
-                    // NavigationLink(destination: DetailView(),
-                    //label: {
-                    
+        
                     Button(action: {
                         selectedItem = item
 
@@ -41,38 +33,26 @@ struct ContentView: View {
 
                         HStack{
                             HStack{
-                                VStack(spacing: 30){
+                                VStack(spacing: 20){
                                     HStack {
                                         Image(systemName: "checkmark.circle")
                                             .font(.system(size: 25))
                                             .frame(width: 25, height: 25)
                                             .padding(.leading, 10)
-                                        
                                          Text(item.title)
-                                        
-                                       Text("Titulo 1")
                                             .font(.callout)
                                             .bold()
                                             .lineLimit(1)
                                         //.foregroundColor(.green)
                                         Spacer()
-                                        
                                     }
                                     HStack {
-                                        
                                         Text(item.description)
-                                        
-                                        
-                                       Text("Texto de descrição da tarefa")
                                             .font(.system(size: 12))
                                             .lineLimit(7)
                                         Spacer()
                                     }
-                                    
                                      Text(item.date)
-                                    
-                                    
-                                    Text("Data: 21 / 09 / 1988")
                                         .font(.caption)
                                         .lineLimit(1)
                                 }
@@ -90,7 +70,6 @@ struct ContentView: View {
 
                     }
                    
-                    
                 }
                 .onDelete(perform: deletePost)
                 
@@ -104,17 +83,12 @@ struct ContentView: View {
                }
         .sheet(item: $selectedItem) { item in
             DetailView(title: $title, description: $description, item: item)
+       
         }
-        
-//        .sheet(isPresented: $isDetailViewPresented) {
-//            if let item = selectedItem {
-//                DetailView(title: $title, description: $description, item: item)
-//
-//
-//            }
-//        }
-        .sheet(isPresented: $isPresentedNewPost, content: {
+       
+        .fullScreenCover(isPresented: $isPresentedNewPost, content: {
             NewPostView(title: $title, description: $description, date: $date, isPresented: $isPresentedNewPost)
+            
             
         })
     }
@@ -127,12 +101,11 @@ struct ContentView: View {
                 let parameters: [String: Any] = ["id": id]
                 self.viewModel.deletePost(parameters: parameters, id: id)
                 self.viewModel.fetchPost()
-                print("Id enviado para api \(id)")
+                print("Item excluído com sucesso")
             }
         }
     }
 
- 
     var plusButton:  some View{
         Button(action: {
             
@@ -146,7 +119,6 @@ struct ContentView: View {
         })
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
