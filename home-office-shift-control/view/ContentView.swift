@@ -43,7 +43,6 @@ struct ContentView: View {
                                             .font(.callout)
                                             .bold()
                                             .lineLimit(1)
-                                        //.foregroundColor(.green)
                                         Spacer()
                                     }
                                     HStack {
@@ -116,6 +115,8 @@ struct ContentView: View {
         }, label: {
             Image(systemName: "plus.circle.fill")
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .foregroundColor(.black)
+            
         })
     }
 }

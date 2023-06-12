@@ -15,10 +15,47 @@ struct SwiftUIView: View {
     @State private var dataSelecionada = Date()
     @State private var wordCount: Int = 0
     
+    
+    @State private var mostrarData = false
+    
     var body: some View {
         
         NavigationView{
-            VStack{
+            
+            
+            VStack(spacing: 15){
+                
+                Toggle(isOn: $mostrarData) {
+                    Text("Finalizar tarefa")
+                        .bold()
+                }
+                .foregroundColor(mostrarData ? .black : .primary)
+    
+                
+                HStack {
+                    VStack{
+                        Text("Inicio da tarefa")
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Text("11/ 06/ 2023 21:52")
+                            .font(.system(size: 14))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                   
+                    
+                    
+                    VStack{
+                        Text("Tarefa finalziada")
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            
+                        Text("11/ 06/ 2023 21:52")
+                            .font(.system(size: 14))
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            
+                    }
+                      
+                }
                 
                 Text("Titulo da tarefa")
                     .bold()
@@ -32,10 +69,12 @@ struct SwiftUIView: View {
                             .stroke(Color.black, lineWidth: 2)
                     )
                 
-                DatePicker(selection: /*@START_MENU_TOKEN@*/.constant(Date())/*@END_MENU_TOKEN@*/, label: { Text("Data") })
+                //DatePicker(selection: /*@START_MENU_TOKEN@*/.constant(Date())/*@END_MENU_TOKEN@*/, label: { Text("Data") })
+                
+    
                 
                 Text("Descrição")
-                
+                    .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 TextEditor(text: $inputTitle.value)
@@ -76,6 +115,7 @@ struct SwiftUIView: View {
                 })
           
         }
+        
         .onTapGesture {
             hideKeybord()
         }
@@ -118,6 +158,32 @@ struct SwiftUIView: View {
         })
     }
     
+}
+
+
+struct CustomToggleStyle: ToggleStyle {
+    @State private var vibrateOnRing = false
+    func makeBody(configuration: Configuration) -> some View {
+        Button(action: {
+            
+            configuration.isOn.toggle()
+            vibrateOnRing = false
+            
+            
+        }) {
+            
+            HStack {
+
+                    Toggle(isOn: $vibrateOnRing) {
+                        
+                    }
+             
+                Text(configuration.isOn ? "Finalizar tarefa" : "Tarefa finalizada")
+                    .bold()
+            }
+        }
+        .foregroundColor(configuration.isOn ? .black : .gray) // Defina as cores desejadas para o texto quando ativado e desativado
+    }
 }
 
 struct SwiftUIView_Previews: PreviewProvider {

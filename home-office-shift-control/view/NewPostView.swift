@@ -16,7 +16,7 @@ struct NewPostView: View {
     @State var isAlert = false
     @State private var wordCount: Int = 0
     @State private var dataSelecionada = Date()
-    @ObservedObject private var inputTitle = TextLimiter(limit: 60)
+    @ObservedObject private var inputTitle = TextLimiter(limit: 45)
     @ObservedObject private var inputDescription = TextLimiter(limit: 100)
     private let dateFormatte = formate
     
@@ -38,8 +38,8 @@ struct NewPostView: View {
                             .stroke(Color.black, lineWidth: 2)
                     )
                 
-                DatePicker("Data inicio: ", selection: $dataSelecionada)
-                DatePicker(selection: /*@START_MENU_TOKEN@*/.constant(Date())/*@END_MENU_TOKEN@*/, label: { Text("Data").bold() })
+               // DatePicker("Data inicio: ", selection: $dataSelecionada)
+                DatePicker(selection: $dataSelecionada, label: { Text("Data para inicio").bold() })
                 
                 Text("Descrição")
                     .bold()

@@ -67,10 +67,4 @@ struct DetailView: View {
             Text("Salvar")
         }
     }
-
-
-
-
-
-    
 }
