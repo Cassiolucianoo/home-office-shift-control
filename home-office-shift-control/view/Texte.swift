@@ -14,23 +14,21 @@ struct SwiftUIView: View {
     @ObservedObject private var inputDescription = TextLimiter(limit: 100)
     @State private var dataSelecionada = Date()
     @State private var wordCount: Int = 0
-    
-    
     @State private var mostrarData = false
     
     var body: some View {
         
         NavigationView{
             
-            
             VStack(spacing: 15){
                 
-                Toggle(isOn: $mostrarData) {
-                    Text("Finalizar tarefa")
-                        .bold()
-                }
-                .foregroundColor(mostrarData ? .black : .primary)
-    
+                Text("Finalizar tarefa")
+                    .bold()
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                Toggle(isOn: $mostrarData){
+                    
+                }.toggleStyle(SwitchToggleStyle(tint: .black))
+                
                 
                 HStack {
                     VStack{
@@ -41,26 +39,25 @@ struct SwiftUIView: View {
                             .font(.system(size: 14))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                   
                     
+                    if mostrarData {
+                        VStack{
+                            Text("Tarefa finalziada")
+                                .bold()
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                            
+                            Text("11/ 06/ 2023 21:52")
+                                .font(.system(size: 14))
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                            
+                        }}
                     
-                    VStack{
-                        Text("Tarefa finalziada")
-                            .bold()
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            
-                        Text("11/ 06/ 2023 21:52")
-                            .font(.system(size: 14))
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            
-                    }
-                      
                 }
                 
                 Text("Titulo da tarefa")
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    
+                
                 TextField("Exemplo: Desenvolvendo view", text: $inputTitle.value)
                 
                     .padding(20)
@@ -68,10 +65,6 @@ struct SwiftUIView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.black, lineWidth: 2)
                     )
-                
-                //DatePicker(selection: /*@START_MENU_TOKEN@*/.constant(Date())/*@END_MENU_TOKEN@*/, label: { Text("Data") })
-                
-    
                 
                 Text("Descrição")
                     .bold()
@@ -105,7 +98,7 @@ struct SwiftUIView: View {
                     return Alert(title: title, message: message)
                 }
             
-                .navigationBarTitle("Nova tarefa", displayMode: .inline)
+                .navigationBarTitle("Criar tarefa", displayMode: .inline)
                 .navigationBarItems(leading: leading, trailing: trailing)
             
                 .onChange(of: inputDescription.value , perform: { value in
@@ -113,9 +106,8 @@ struct SwiftUIView: View {
                     let words = value.count
                     self.wordCount = words
                 })
-          
+            
         }
-        
         .onTapGesture {
             hideKeybord()
         }
@@ -127,64 +119,47 @@ struct SwiftUIView: View {
             
         }, label: {
             Image(systemName: "x.circle.fill")
-                .foregroundColor(.red)
-                .font(.system(size: 30))
+                .foregroundColor(.black)
+                .font(.system(size: 25))
         })
     }
     
     var trailing: some View{
         Button(action: {
-            // title = inputTitle.value
-            // description = inputDescription.value
-            // date =  dateFormatte.string(from: self.dataSelecionada)
-            
-            
-            
-            //                if title != "" && description != "" {
-            //                    let parameters: [String: Any] = ["title": title, "description": description, "date": dateFormatte.string(from: self.dataSelecionada)]
-            //                    viewwModel.createPost(parameters: parameters)
-            //                    viewwModel.fetchPost() // Atualiza a lista imediatamente após adicionar o item
-            //                    isPresented.toggle()
-            //                    print("Adicionando")
-            //                } else {
-            //                    isAlert.toggle()
-            //                }
             
             
         }, label: {
             Image(systemName: "doc.fill.badge.plus")
-                .foregroundColor(.green)
-                .font(.system(size: 30))
+                .foregroundColor(.black)
+                .font(.system(size: 25))
         })
     }
     
 }
 
-
-struct CustomToggleStyle: ToggleStyle {
-    @State private var vibrateOnRing = false
-    func makeBody(configuration: Configuration) -> some View {
-        Button(action: {
-            
-            configuration.isOn.toggle()
-            vibrateOnRing = false
-            
-            
-        }) {
-            
-            HStack {
-
-                    Toggle(isOn: $vibrateOnRing) {
-                        
-                    }
-             
-                Text(configuration.isOn ? "Finalizar tarefa" : "Tarefa finalizada")
-                    .bold()
-            }
-        }
-        .foregroundColor(configuration.isOn ? .black : .gray) // Defina as cores desejadas para o texto quando ativado e desativado
-    }
-}
+//struct CustomToggleStyle: ToggleStyle {
+//    @State private var vibrateOnRing = false
+//    func makeBody(configuration: Configuration) -> some View {
+//        Button(action: {
+//
+//            configuration.isOn.toggle()
+//            vibrateOnRing = false
+//
+//        }) {
+//
+//            HStack {
+//
+//                Toggle(isOn: $vibrateOnRing) {
+//
+//                }
+//
+//                Text(configuration.isOn ? "Finalizar tarefa" : "Tarefa finalizada")
+//                    .bold()
+//            }
+//        }
+//        .foregroundColor(configuration.isOn ? .black : .gray) // Defina as cores desejadas para o texto quando ativado e desativado
+//    }
+//}
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {

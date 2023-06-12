@@ -20,26 +20,27 @@ struct NewPostView: View {
     @ObservedObject private var inputDescription = TextLimiter(limit: 100)
     private let dateFormatte = formate
     
-
+    
     var body: some View {
         
         NavigationView{
             VStack(spacing: 10){
-
+                
+                Divider()
+                
+                // DatePicker("Data inicio: ", selection: $dataSelecionada)
+                DatePicker(selection: $dataSelecionada, label: { Text("Data inicio").bold() }).disabled(true)
+                
                 Text("Titulo da tarefa")
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                TextField("Exemplo: Desenvolvendo view", text: $inputTitle.value)
                 
-                    .padding(20)
+                TextField("Exemplo: Desenvolvendo view", text: $inputTitle.value)
+                    .padding(10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.black, lineWidth: 2)
                     )
-                
-               // DatePicker("Data inicio: ", selection: $dataSelecionada)
-                DatePicker(selection: $dataSelecionada, label: { Text("Data para inicio").bold() })
                 
                 Text("Descrição")
                     .bold()
@@ -61,29 +62,29 @@ struct NewPostView: View {
             
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .accentColor(.black)
-                .navigationTitle("Criar tarefa")
-                .onChange(of: inputDescription.value , perform: { value in
-                    print("Contin Entrada da tecla\(self.wordCount)")
-                    let words = value.count
-                    self.wordCount = words
-                })
+            .accentColor(.black)
+            .navigationTitle("Criar tarefa")
+            .onChange(of: inputDescription.value , perform: { value in
+                print("Contin Entrada da tecla\(self.wordCount)")
+                let words = value.count
+                self.wordCount = words
+            })
             
-                .alert(isPresented: $isAlert) {
-                    let title = Text("CAMPOS EM BRANCO")
-                    let message = Text("Todos os campos são obrigatorios!")
-                    return Alert(title: title, message: message)
-                }
+            .alert(isPresented: $isAlert) {
+                let title = Text("CAMPOS EM BRANCO")
+                let message = Text("Todos os campos são obrigatorios!")
+                return Alert(title: title, message: message)
+            }
             
-                .navigationBarTitle("Nova tarefa", displayMode: .inline)
-                .navigationBarItems(leading: leading, trailing: trailing)
+            .navigationBarTitle("Nova tarefa", displayMode: .inline)
+            .navigationBarItems(leading: leading, trailing: trailing)
             
-                .onChange(of: inputDescription.value , perform: { value in
-                    print("Contin Entrada da tecla\(self.wordCount)")
-                    let words = value.count
-                    self.wordCount = words
-                })
-          
+            .onChange(of: inputDescription.value , perform: { value in
+                print("Contin Entrada da tecla\(self.wordCount)")
+                let words = value.count
+                self.wordCount = words
+            })
+            
         }
         .onTapGesture {
             hideKeybord()
@@ -105,10 +106,21 @@ struct NewPostView: View {
             print("Cancelar  4558")
             isPresented.toggle()
         }, label: {
-            Image(systemName: "x.circle.fill")
-                .foregroundColor(.black)
-                .font(.system(size: 25))
-  
+            
+            ZStack {
+                Image("cancel2")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.black)
+                
+                Text("cancelar")
+                    .foregroundColor(.black)
+                    .font(.system(size: 12))
+                    .offset(x: 0, y: 20)
+                    .padding(.top, 3)// Ajuste o valor do deslocamento conforme necessário
+                
+            }
+            
         })
     }
     
@@ -117,8 +129,6 @@ struct NewPostView: View {
             title = inputTitle.value
             description = inputDescription.value
             date =  dateFormatte.string(from: self.dataSelecionada)
-            
-            
             
             if title != "" && description != "" {
                 let parameters: [String: Any] = ["title": title, "description": description, "date": dateFormatte.string(from: self.dataSelecionada)]
@@ -129,14 +139,21 @@ struct NewPostView: View {
             } else {
                 isAlert.toggle()
             }
-
             
         }, label: {
-            Image(systemName: "doc.fill.badge.plus")
-                .foregroundColor(.black)
-                .font(.system(size: 25))
+            
+            ZStack {
+                Image("disquete")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.black)
+                
+                Text("Salvar")
+                    .foregroundColor(.black)
+                    .font(.system(size: 12))
+                    .offset(x: 0, y: 20)
+                    .padding(.top, 3)// Ajuste o valor do deslocamento conforme necessário
+            }
         })
     }
-    
-   
 }

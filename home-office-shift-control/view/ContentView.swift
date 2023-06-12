@@ -113,10 +113,19 @@ struct ContentView: View {
             description = ""
             print(" + precionado")
         }, label: {
-            Image(systemName: "plus.circle.fill")
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                .foregroundColor(.black)
             
+            ZStack {
+                Image("add")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.black)
+                Text("Novo")
+                    .foregroundColor(.black)
+                    .font(.system(size: 12))
+                    .offset(x: 0, y: 20) // Ajuste o valor do deslocamento conforme necessário
+                
+            }
+
         })
     }
 }
