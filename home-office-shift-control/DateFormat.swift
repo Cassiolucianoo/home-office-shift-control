@@ -13,3 +13,5 @@ var formate: DateFormatter {
    dateFormatter.dateFormat = "dd/ MM/ YYYY HH:mm"
    return dateFormatter
 }
+
+

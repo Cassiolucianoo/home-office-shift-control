@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,10 +16,12 @@
 		DF6F323729CEB64500E06F7B /* home_office_shift_controlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F323629CEB64500E06F7B /* home_office_shift_controlApp.swift */; };
 		DF6F323B29CEB64700E06F7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF6F323A29CEB64700E06F7B /* Assets.xcassets */; };
 		DF6F323E29CEB64700E06F7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF6F323D29CEB64700E06F7B /* Preview Assets.xcassets */; };
-		DF70FC9A2A330C450090BB67 /* Texte.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70FC992A330C450090BB67 /* Texte.swift */; };
 		DF79981529D5756A00AFDC8B /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF79981429D5756A00AFDC8B /* NewPostView.swift */; };
 		DF79981729D5825200AFDC8B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF79981629D5825200AFDC8B /* DetailView.swift */; };
 		DF805D6F29DA925C00D5DF65 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805D6E29DA925C00D5DF65 /* DateFormat.swift */; };
+		DFC00DBB2A3ABFA6008ACA14 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DFC00DBA2A3ABFA6008ACA14 /* Alamofire */; };
+		DFC00DBD2A3AF86B008ACA14 /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC00DBC2A3AF86B008ACA14 /* HideKeyboard.swift */; };
+		DFC00DBF2A3AFADE008ACA14 /* Splashscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC00DBE2A3AFADE008ACA14 /* Splashscreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +36,11 @@
 		DF6F323A29CEB64700E06F7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF6F323D29CEB64700E06F7B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DF6F323F29CEB64700E06F7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DF70FC992A330C450090BB67 /* Texte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texte.swift; sourceTree = "<group>"; };
 		DF79981429D5756A00AFDC8B /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
 		DF79981629D5825200AFDC8B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		DF805D6E29DA925C00D5DF65 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
+		DFC00DBC2A3AF86B008ACA14 /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
+		DFC00DBE2A3AFADE008ACA14 /* Splashscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splashscreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFC00DBB2A3ABFA6008ACA14 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,7 +61,7 @@
 				DF5DBBAB29D16C6300B37585 /* ContentView.swift */,
 				DF79981429D5756A00AFDC8B /* NewPostView.swift */,
 				DF79981629D5825200AFDC8B /* DetailView.swift */,
-				DF70FC992A330C450090BB67 /* Texte.swift */,
+				DFC00DBE2A3AFADE008ACA14 /* Splashscreen.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -97,6 +101,7 @@
 		DF6F323529CEB64500E06F7B /* home-office-shift-control */ = {
 			isa = PBXGroup;
 			children = (
+				DFC00DBC2A3AF86B008ACA14 /* HideKeyboard.swift */,
 				DF3252F02A3858AC005F48D3 /* PullToRefresh.swift */,
 				DF678AFD29E49EC400FC38C2 /* File.swift */,
 				DF805D6E29DA925C00D5DF65 /* DateFormat.swift */,
@@ -136,6 +141,9 @@
 			dependencies = (
 			);
 			name = "home-office-shift-control";
+			packageProductDependencies = (
+				DFC00DBA2A3ABFA6008ACA14 /* Alamofire */,
+			);
 			productName = "home-office-shift-control";
 			productReference = DF6F323329CEB64500E06F7B /* home-office-shift-control.app */;
 			productType = "com.apple.product-type.application";
@@ -163,6 +171,9 @@
 				Base,
 			);
 			mainGroup = DF6F322A29CEB64500E06F7B;
+			packageReferences = (
+				DFC00DB92A3ABFA6008ACA14 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = DF6F323429CEB64500E06F7B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -193,12 +204,13 @@
 				DF79981729D5825200AFDC8B /* DetailView.swift in Sources */,
 				DF79981529D5756A00AFDC8B /* NewPostView.swift in Sources */,
 				DF805D6F29DA925C00D5DF65 /* DateFormat.swift in Sources */,
-				DF70FC9A2A330C450090BB67 /* Texte.swift in Sources */,
+				DFC00DBD2A3AF86B008ACA14 /* HideKeyboard.swift in Sources */,
 				DF5DBBB129D16C6300B37585 /* ContentView.swift in Sources */,
 				DF3252F12A3858AC005F48D3 /* PullToRefresh.swift in Sources */,
 				DF6F323729CEB64500E06F7B /* home_office_shift_controlApp.swift in Sources */,
 				DF598D9029D2BCC90028E5BE /* ViewModel.swift in Sources */,
 				DF678AFE29E49EC400FC38C2 /* File.swift in Sources */,
+				DFC00DBF2A3AFADE008ACA14 /* Splashscreen.swift in Sources */,
 				DF4E95D529DB8C0A0034C7A7 /* TextLimiter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,6 +398,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DFC00DB92A3ABFA6008ACA14 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DFC00DBA2A3ABFA6008ACA14 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFC00DB92A3ABFA6008ACA14 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DF6F322B29CEB64500E06F7B /* Project object */;
 }
