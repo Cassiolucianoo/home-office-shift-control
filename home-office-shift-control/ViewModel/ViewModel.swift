@@ -95,44 +95,47 @@ class  ViewModel: ObservableObject {
     }
     
     //MARK: - Update DATA ----------------------
-    func updatePost<T: Encodable>(parameters: [String: T], id: Int) {
+    func updatePost(parameters: [String: Any], id: Int ) {
+        
+        
+        
         guard let url = URL(string: "\(prefixUrl)/posts/\(id)") else {
-            print("URL não encontrada: \(id)")
+            print("URL não encontrada\(id)")
             return
         }
         
-        do {
-            let jsonData = try JSONEncoder().encode(parameters)
+        let data = try! JSONSerialization.data(withJSONObject: parameters)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.httpBody = data
+        request.setValue("application/json", forHTTPHeaderField:"Content-Type")
+        
+        
+        URLSession.shared.dataTask(with: request){ (data, res, error)in
+            if error != nil {
+                print("error", error?.localizedDescription ?? "")
+                return
+            }
             
-            var request = URLRequest(url: url)
-            request.httpMethod = "PUT"
-            request.httpBody = jsonData
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
-                if let error = error {
-                    print("Erro ao atualizar o post:", error.localizedDescription)
-                    return
+            do {
+                if let data = data {
+                    let result = try JSONDecoder().decode(DataModel.self, from: data)
+                    DispatchQueue.main.async {
+                        print(result)
+                    }
+                }else {
+                    
+                    print("No data")
+                    
                 }
                 
-                if let data = data {
-                    do {
-                        let result = try JSONDecoder().decode(DataModel.self, from: data)
-                        DispatchQueue.main.async {
-                            print(result)
-                        }
-                    } catch {
-                        print("Erro ao decodificar a resposta:", error.localizedDescription)
-                    }
-                } else {
-                    print("Nenhum dado retornado")
-                }
-            }.resume()
-        } catch {
-            print("Erro ao codificar os parâmetros:", error.localizedDescription)
-        }
+            }catch let JsonError {
+                print("fetch json error: ", JsonError.localizedDescription)
+            }
+        }.resume()
     }
-
+    
     
     //MARK: - delete DATA ----------------------------------------------------------------------------------------
     func deletePost(parameters: [String: Any], id : Int ) {

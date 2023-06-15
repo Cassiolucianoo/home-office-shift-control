@@ -17,6 +17,7 @@ struct ContentView: View {
     @State var tempo = ""
     @State var date = ""
     @State private var selectedItem: PostModel? = nil
+    @State private var isRefreshing = false
 
     var body: some View {
         
@@ -76,20 +77,34 @@ struct ContentView: View {
             .listStyle(InsetListStyle())
                 .navigationBarTitle("Tarefas")
                 .navigationBarItems(trailing: plusButton)
+//            .overlay(
+//                PullToRefresh(isRefreshing: $isRefreshing) {
+//
+//                                    // Ação de atualização dos dados
+//                    refreshData()
+//
+//                }
+ //           )
         }
         .onAppear {
-                   viewModel.fetchPost() // Chama a função para buscar os dados dos posts
-               }
-        .sheet(item: $selectedItem) { item in
-            DetailView(title: $title, description: $description, item: item)
-       
+            viewModel.fetchPost() // Chama a função para buscar os dados dos posts
         }
-       
+        .sheet(item: $selectedItem) { item in
+            DetailView(title: title, description: description, dateText: date, item: item )
+        }
         .fullScreenCover(isPresented: $isPresentedNewPost, content: {
             NewPostView(title: $title, description: $description, date: $date, isPresented: $isPresentedNewPost)
-            
-            
         })
+//        .gesture(
+//                     DragGesture()
+//                         .onChanged { value in
+//                             if value.translation.height > 50 && !isRefreshing {
+//                                 isRefreshing = true
+//                                 refreshData()
+//                             }
+//                         }
+//                 )
+
     }
     
     private func deletePost(indexSet: IndexSet) {
@@ -104,16 +119,27 @@ struct ContentView: View {
             }
         }
     }
+    
+//    private func refreshData() {
+//        isRefreshing = true
+//        viewModel.fetchPost()
+//        isRefreshing = false
+//    }
+//
+//    private func refreshData() {
+//           DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//               viewModel.fetchPost()
+//               isRefreshing = false
+//           }
+//       }
 
     var plusButton:  some View{
         Button(action: {
-            
             isPresentedNewPost.toggle()
             title = ""
             description = ""
             print(" + precionado")
         }, label: {
-            
             ZStack {
                 Image("add")
                     .resizable()
@@ -123,9 +149,7 @@ struct ContentView: View {
                     .foregroundColor(.black)
                     .font(.system(size: 12))
                     .offset(x: 0, y: 20) // Ajuste o valor do deslocamento conforme necessário
-                
             }
-
         })
     }
 }
@@ -133,5 +157,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(ViewModel())
     }
 }

@@ -8,13 +8,28 @@
 import SwiftUI
 
 struct PullToRefresh: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    @Binding var isRefreshing: Bool
+    var onRefresh: () -> Void
 
-struct PullToRefresh_Previews: PreviewProvider {
-    static var previews: some View {
-        PullToRefresh()
+    var body: some View {
+        if isRefreshing {
+            VStack {
+                Spacer()
+                Text("Atualizando")
+                    .bold()
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .black))
+                
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(UIColor.systemBackground).opacity(0.6)) // Define a cor de fundo transparente
+                        .onAppear(perform: onRefresh)
+                        .allowsHitTesting(false)
+                    }
+        }
     }
-}
+
+
+
+

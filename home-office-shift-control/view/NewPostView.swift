@@ -59,7 +59,7 @@ struct NewPostView: View {
                     .foregroundColor(.black)
                 
             }
-            
+           
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .accentColor(.black)

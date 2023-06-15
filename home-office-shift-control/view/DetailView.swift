@@ -8,27 +8,27 @@
 import SwiftUI
 
 
-
 struct DetailView: View {
     
     @State var isAlert = false
     @ObservedObject private var inputTitle = TextLimiter(limit: 60)
     @ObservedObject private var inputDescription = TextLimiter(limit: 100)
-    @State private var dataSelecionada = Date()
     @State private var wordCount: Int = 0
     @State private var mostrarData = false
     
     
     @Environment(\.presentationMode) var presentationMode
-    @Binding var title: String
-    @Binding var description: String
-    let item: PostModel
-    @EnvironmentObject var viewModel: ViewModel
+    @State var title = ""
+    @State  var description = ""
+    @State var dateText  = ""
+    let item : PostModel
     
+    
+    @EnvironmentObject var viewwModel: ViewModel
+ 
     var body: some View {
         
         NavigationView{
-            
             
             VStack(spacing: 15){
                 
@@ -47,7 +47,7 @@ struct DetailView: View {
                         Text("Inicio da tarefa")
                             .bold()
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        Text("11/ 06/ 2023 21:52")
+                        Text(dateText)
                             .font(.system(size: 14))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -70,7 +70,7 @@ struct DetailView: View {
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                TextField("Exemplo: Desenvolvendo view", text: $inputTitle.value)
+                TextField("Exemplo: Desenvolvendo view", text: $title)
                 
                     .padding(10)
                     .overlay(
@@ -82,7 +82,7 @@ struct DetailView: View {
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                TextEditor(text: $inputTitle.value)
+                TextEditor(text: $description)
                     .frame(height: 200)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
@@ -95,7 +95,16 @@ struct DetailView: View {
                     .font(.system(size: 15))
                     .foregroundColor(.black)
                 
-            }.padding()
+            }
+            .onAppear {
+          
+                          self.title = item.title
+                          self.description = item.description
+                          self.dateText = item.date
+                     }
+            
+            
+            .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .accentColor(.black)
                 .navigationTitle("Editar tarefa")
@@ -131,6 +140,16 @@ struct DetailView: View {
         Button(action: {
             
             
+            if title != "" && description != "" {
+                let parameters: [String: Encodable] = ["id": item.id, "title": title, "description": description, "date": dateText]
+                let id  = item.id
+                viewwModel.updatePost(parameters: parameters, id: id)
+                viewwModel.fetchPost()
+                presentationMode.wrappedValue.dismiss()
+                print(item.id)
+            }
+
+            
         }, label: {
             ZStack {
                    Image("edit2")
@@ -149,83 +168,3 @@ struct DetailView: View {
     }
     
 }
-
-
-
-
-//struct DetailView: View {
-//    @Environment(\.presentationMode) var presentationMode
-//    @Binding var title: String
-//    @Binding var description: String
-//    let item: PostModel
-//    @EnvironmentObject var viewModel: ViewModel
-//
-//    var body: some View {
-//        ZStack {
-//            Color.gray.opacity(0.1).edgesIgnoringSafeArea(.all)
-//            VStack(alignment: .leading) {
-//                Text("Criar tarefa")
-//                    .font(Font.system(size: 16, weight: .bold))
-//
-//                TextField("Titulo", text: $title)
-//                    .padding()
-//                    .background(Color.white)
-//                    .cornerRadius(6)
-//                    .padding(.bottom)
-//
-//                TextField("Descrição da tarefa", text: $description)
-//                    .padding()
-//                    .background(Color.white)
-//                    .cornerRadius(6)
-//                    .padding(.bottom)
-//
-//                Spacer()
-//            }
-//            .padding()
-//            .onAppear {
-//
-//                self.title = item.title
-//                self.description = item.description
-//            }
-//        }
-//        .navigationBarTitle("Editar tarefa realizada", displayMode: .inline)
-//        .navigationBarItems(trailing: trailing)
-//    }
-//
-//
-    
-    
-    
-    
-    
-    
-    
-    
-//
-//    var trailing: some View {
-//        Button(action: {
-//            if title != "" && description != "" {
-//                let parameters: [String: String] = ["id": "\(item.id)", "title": title, "description": description]
-//                do {
-//                    let jsonData = try JSONEncoder().encode(parameters)
-//                    if let jsonString = String(data: jsonData, encoding: .utf8) {
-//                        let updateParameters = ["data": jsonString]
-//                        viewModel.updatePost(parameters: updateParameters, id: item.id)
-//                        viewModel.fetchPost()
-//                        presentationMode.wrappedValue.dismiss()
-//                        print(item.id)
-//                    }
-//                } catch {
-//                    print("Error encoding parameters:", error.localizedDescription)
-//                }
-//            }
-//        }) {
-//            Text("Salvar")
-//        }
-//    }
-//
-    
-    
-    
-    
-//}

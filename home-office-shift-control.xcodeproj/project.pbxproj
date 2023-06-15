@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF3252F12A3858AC005F48D3 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3252F02A3858AC005F48D3 /* PullToRefresh.swift */; };
 		DF4E95D529DB8C0A0034C7A7 /* TextLimiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4E95D429DB8C0A0034C7A7 /* TextLimiter.swift */; };
 		DF598D9029D2BCC90028E5BE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF598D8F29D2BCC90028E5BE /* ViewModel.swift */; };
 		DF5DBBB129D16C6300B37585 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5DBBAB29D16C6300B37585 /* ContentView.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF3252F02A3858AC005F48D3 /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		DF4E95D429DB8C0A0034C7A7 /* TextLimiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLimiter.swift; sourceTree = "<group>"; };
 		DF598D8F29D2BCC90028E5BE /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		DF5DBBAB29D16C6300B37585 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 		DF6F323529CEB64500E06F7B /* home-office-shift-control */ = {
 			isa = PBXGroup;
 			children = (
+				DF3252F02A3858AC005F48D3 /* PullToRefresh.swift */,
 				DF678AFD29E49EC400FC38C2 /* File.swift */,
 				DF805D6E29DA925C00D5DF65 /* DateFormat.swift */,
 				DF4E95D429DB8C0A0034C7A7 /* TextLimiter.swift */,
@@ -192,6 +195,7 @@
 				DF805D6F29DA925C00D5DF65 /* DateFormat.swift in Sources */,
 				DF70FC9A2A330C450090BB67 /* Texte.swift in Sources */,
 				DF5DBBB129D16C6300B37585 /* ContentView.swift in Sources */,
+				DF3252F12A3858AC005F48D3 /* PullToRefresh.swift in Sources */,
 				DF6F323729CEB64500E06F7B /* home_office_shift_controlApp.swift in Sources */,
 				DF598D9029D2BCC90028E5BE /* ViewModel.swift in Sources */,
 				DF678AFE29E49EC400FC38C2 /* File.swift in Sources */,
