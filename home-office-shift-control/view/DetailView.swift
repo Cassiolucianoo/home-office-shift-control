@@ -154,7 +154,7 @@ struct DetailView: View {
                 let parameters: [String: Encodable] = ["id": item.id, "title": title, "description": description, "date": dateText]
                 let id  = item.id
                 viewwModel.updatePost(parameters: parameters, id: id)
-                viewwModel.fetchPost()
+               // viewwModel.fetchPost()
                 presentationMode.wrappedValue.dismiss()
                 print(item.id)
             }

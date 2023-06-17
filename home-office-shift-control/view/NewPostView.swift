@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct NewPostView: View {
-    @Binding var title :String
+    @Binding var title: String
     @Binding var description: String
     @Binding var date: String
     @Binding var isPresented: Bool
     @EnvironmentObject var viewwModel: ViewModel
+    
     @State var isAlert = false
+    @State var isAlertAddCard = false
     @State private var wordCount: Int = 0
     @State private var dataSelecionada = Date()
     @ObservedObject private var inputTitle = TextLimiter(limit: 45)
     @ObservedObject private var inputDescription = TextLimiter(limit: 100)
     private let dateFormatte = formate
+
+    @State private var alertType: AlertType?
     
     var body: some View {
         NavigationView {
@@ -59,11 +63,16 @@ struct NewPostView: View {
                 let words = value.count
                 self.wordCount = words
             })
-            .alert(isPresented: $isAlert) {
-                Alert(
-                    title: Text("CAMPOS EM BRANCO"),
-                    message: Text("Todos os campos são obrigatórios!")
-                )
+            .alert(item: $alertType) { alertType in
+                if let alertItem = alertType.alertItem {
+                    return Alert(
+                        title: alertItem.title,
+                        message: alertItem.message,
+                        dismissButton: alertItem.dismissButton
+                    )
+                } else {
+                    return Alert(title: Text("")) // Alerta vazio
+                }
             }
             .navigationBarTitle("Nova tarefa", displayMode: .inline)
             .navigationBarItems(leading: leading, trailing: trailing)
@@ -115,12 +124,30 @@ struct NewPostView: View {
             
             if title != "" && description != "" {
                 let parameters: [String: Any] = ["title": title, "description": description, "date": dateFormatte.string(from: self.dataSelecionada)]
-                viewwModel.createPost(parameters: parameters)
-                viewwModel.fetchPost()
-                isPresented.toggle()
-                print("Adicionando")
+                viewwModel.createPost(parameters: parameters) { result in
+                    switch result {
+                    case .success:
+                        // Lógica de sucesso
+                        viewwModel.fetchPosts { result in
+                            switch result {
+                            case .success:
+                                isPresented.toggle()
+                                print("Adicionando")
+                            case .failure(let error):
+                                // Lógica de tratamento de erro
+                                alertType = .addError
+                                print("Erro ao criar post:", error.localizedDescription)
+                            }
+                        }
+                    case .failure(let error):
+                        // Lógica de tratamento de erro
+                        alertType = .addError
+                        print("Erro ao criar post:", error.localizedDescription)
+                    }
+                }
+                
             } else {
-                isAlert.toggle()
+                alertType = .emptyFields
             }
         }) {
             ZStack {
@@ -137,10 +164,9 @@ struct NewPostView: View {
             }
         }
     }
+    
+    
 }
-
-
-
 
 
 //struct NewPostView: View {

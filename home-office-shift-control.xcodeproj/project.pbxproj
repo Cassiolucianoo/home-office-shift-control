@@ -22,6 +22,7 @@
 		DFC00DBB2A3ABFA6008ACA14 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DFC00DBA2A3ABFA6008ACA14 /* Alamofire */; };
 		DFC00DBD2A3AF86B008ACA14 /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC00DBC2A3AF86B008ACA14 /* HideKeyboard.swift */; };
 		DFC00DBF2A3AFADE008ACA14 /* Splashscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC00DBE2A3AFADE008ACA14 /* Splashscreen.swift */; };
+		DFD63B4D2A3C52DE00C33317 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD63B4C2A3C52DE00C33317 /* AlertType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		DF805D6E29DA925C00D5DF65 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 		DFC00DBC2A3AF86B008ACA14 /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 		DFC00DBE2A3AFADE008ACA14 /* Splashscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splashscreen.swift; sourceTree = "<group>"; };
+		DFD63B4C2A3C52DE00C33317 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		DF6F323529CEB64500E06F7B /* home-office-shift-control */ = {
 			isa = PBXGroup;
 			children = (
+				DFD63B4C2A3C52DE00C33317 /* AlertType.swift */,
 				DFC00DBC2A3AF86B008ACA14 /* HideKeyboard.swift */,
 				DF3252F02A3858AC005F48D3 /* PullToRefresh.swift */,
 				DF678AFD29E49EC400FC38C2 /* File.swift */,
@@ -211,6 +214,7 @@
 				DF598D9029D2BCC90028E5BE /* ViewModel.swift in Sources */,
 				DF678AFE29E49EC400FC38C2 /* File.swift in Sources */,
 				DFC00DBF2A3AFADE008ACA14 /* Splashscreen.swift in Sources */,
+				DFD63B4D2A3C52DE00C33317 /* AlertType.swift in Sources */,
 				DF4E95D529DB8C0A0034C7A7 /* TextLimiter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

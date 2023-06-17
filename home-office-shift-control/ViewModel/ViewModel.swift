@@ -14,14 +14,13 @@ class ViewModel: ObservableObject {
     
     let prefixUrl = "http://localhost:3000"
     
-  
-    
     init() {
-        fetchPost()
+      //  fetchPost()
     }
     
     //MARK: - Fetch Data
-    func fetchPost() {
+
+    func fetchPosts(completion: @escaping (Result<Void, Error>) -> Void) {
         guard let url = URL(string: "\(prefixUrl)/posts") else {
             print("URL não encontrada")
             return
@@ -29,21 +28,28 @@ class ViewModel: ObservableObject {
         
         AF.request(url)
             .validate()
-            .responseDecodable(of: [PostModel].self, decoder: JSONDecoder()) { [weak self] response in
+            .responseDecodable(of: [PostModel].self, decoder: JSONDecoder()) { response in
                 switch response.result {
-                case .success(let result):
+                case .success(let posts):
                     DispatchQueue.main.async {
-                        self?.items = result
+                        self.items = posts
+                        completion(.success(()))
                     }
                 case .failure(let error):
+                    if let statusCode = response.response?.statusCode {
+                        print("Erro na requisição. Código de status: \(statusCode)")
+                    }
+                    if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
+                        print("Erro na requisição. Mensagem: \(errorMessage)")
+                    }
                     print("Erro ao recuperar dados: POST", error.localizedDescription)
+                    completion(.failure(error))
                 }
             }
     }
-    
-    
+
     //MARK: - Create Data
-    func createPost(parameters: [String: Any]) {
+    func createPost(parameters: [String: Any], completion: @escaping (Result<Void, Error>) -> Void) {
         guard let url = URL(string: "\(prefixUrl)/posts") else {
             print("URL não encontrada")
             return
@@ -51,18 +57,26 @@ class ViewModel: ObservableObject {
         
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate()
-            .responseDecodable(of: PostModel.self, decoder: JSONDecoder()) { [weak self] response in
+            .responseDecodable(of: PostModel.self, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let result):
                     DispatchQueue.main.async {
-                        self?.items.append(result)
+                        self.items.append(result)
+                        completion(.success(()))
                     }
                 case .failure(let error):
+                    if let statusCode = response.response?.statusCode {
+                        print("Erro na requisição. Código de status: \(statusCode)")
+                    }
+                    if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
+                        print("Erro na requisição. Mensagem: \(errorMessage)")
+                    }
                     print("Erro ao criar post: CREATE", error.localizedDescription)
+                    completion(.failure(error))
                 }
             }
     }
-    
+
     //MARK: - Update Data
     func updatePost(parameters: [String: Any], id: Int) {
         guard let url = URL(string: "\(prefixUrl)/posts/\(id)") else {
@@ -107,7 +121,6 @@ class ViewModel: ObservableObject {
             }
     }
 }
-
 
 
 //import Alamofire
