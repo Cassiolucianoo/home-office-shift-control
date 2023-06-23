@@ -1,2 +1,4 @@
-# home-office-shift-control
+# Agenda do dev 
+- SwifitUI 
+- mvvm
 - 
